@@ -1,0 +1,465 @@
+/**
+ * Source Synthesis Mode CSS
+ * Styles for tracking source interactions in academic writing
+ */
+
+/* Source highlighting styles */
+.source-highlight {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    padding: 1px 2px;
+    border-radius: 2px;
+    display: inline;
+    line-height: 1.4;
+}
+
+.source-highlight:hover {
+    filter: brightness(0.9);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Tooltip for source information */
+.source-highlight::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+}
+
+.source-highlight:hover::after {
+    opacity: 1;
+}
+
+/* Source synthesis modal */
+#source-synthesis-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(2px);
+}
+
+#source-synthesis-panel .modal-content {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 700px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+#source-synthesis-panel .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 2px solid #f4ebfa;
+    background-color: #fcf9ff;
+}
+
+#source-synthesis-panel .modal-title {
+    margin: 0;
+    color: #57068c;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+#source-synthesis-panel .modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #666;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+#source-synthesis-panel .modal-close:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+}
+
+#source-synthesis-panel .modal-body {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+    background-color: #fafafa;
+}
+
+/* Instructions section */
+.source-synthesis-instructions {
+    background-color: #f9f4ff;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border-left: 4px solid #57068c;
+}
+
+.source-synthesis-instructions p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.source-synthesis-instructions p:first-child {
+    margin-top: 0;
+}
+
+.source-synthesis-instructions p:last-child {
+    margin-bottom: 0;
+}
+
+.source-synthesis-instructions code {
+    background-color: rgba(87, 6, 140, 0.1);
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    color: #57068c;
+}
+
+/* Source list container */
+#source-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Individual source rows */
+.source-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    transition: all 0.2s ease;
+}
+
+.source-row:hover {
+    background-color: #f0f0f0;
+    border-color: #57068c;
+}
+
+.source-row:last-child {
+    margin-bottom: 0;
+}
+
+.source-row input[type="text"] {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.source-row input[type="text"]:focus {
+    outline: none;
+    border-color: #57068c;
+    box-shadow: 0 0 0 2px rgba(87, 6, 140, 0.1);
+}
+
+.source-row input[type="text"]:first-of-type {
+    flex: 1;
+    min-width: 150px;
+}
+
+.source-row input[type="text"]:last-of-type {
+    flex: 2;
+    min-width: 200px;
+}
+
+.source-row input[type="color"] {
+    width: 40px;
+    height: 38px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    background: none;
+    transition: all 0.2s ease;
+}
+
+.source-row input[type="color"]:hover {
+    border-color: #57068c;
+    transform: scale(1.05);
+}
+
+.source-row button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.source-row button:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+.source-row button:active {
+    transform: scale(0.95);
+}
+
+/* Modal buttons */
+#source-synthesis-panel button {
+    transition: all 0.2s ease;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#source-synthesis-panel button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+#source-synthesis-panel button:active {
+    transform: translateY(0);
+}
+
+#add-source-btn {
+    background-color: #57068c;
+    color: white;
+}
+
+#add-source-btn:hover {
+    background-color: #4a0575;
+}
+
+#apply-sources-btn {
+    background-color: #4caf50;
+    color: white;
+}
+
+#apply-sources-btn:hover {
+    background-color: #45a049;
+}
+
+/* Toolbar integration styles */
+.source-synthesis-mode-options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.source-synthesis-status {
+    background-color: #f4ebfa;
+    color: #57068c;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid #57068c;
+}
+
+.source-synthesis-btn {
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.source-synthesis-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.source-synthesis-btn i {
+    font-size: 11px;
+}
+
+.source-synthesis-stats {
+    color: #666;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    #source-synthesis-panel .modal-content {
+        width: 95%;
+        margin: 10px;
+    }
+    
+    .source-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    
+    .source-row input[type="text"] {
+        flex: none;
+        min-width: auto;
+    }
+    
+    .source-row input[type="color"] {
+        width: 100%;
+        height: 40px;
+    }
+    
+    .source-synthesis-mode-options {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    
+    .source-synthesis-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .source-synthesis-stats {
+        text-align: center;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    #source-synthesis-panel .modal-content {
+        border-radius: 8px;
+    }
+    
+    #source-synthesis-panel .modal-body {
+        padding: 15px;
+    }
+    
+    .source-synthesis-instructions {
+        padding: 10px;
+    }
+    
+    #source-list {
+        padding: 5px;
+    }
+    
+    .source-row {
+        padding: 8px;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .source-highlight {
+        border: 2px solid rgba(0, 0, 0, 0.5);
+    }
+    
+    .source-synthesis-status {
+        border-width: 2px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .source-highlight,
+    .source-synthesis-btn,
+    #source-synthesis-panel button,
+    .source-row {
+        transition: none;
+    }
+    
+    #source-synthesis-panel .modal-content {
+        animation: none;
+    }
+    
+    .source-highlight:hover,
+    .source-synthesis-btn:hover,
+    #source-synthesis-panel button:hover {
+        transform: none;
+    }
+}
+
+/* Print styles */
+@media print {
+    .source-highlight {
+        background-color: transparent !important;
+        border: 1px solid #000;
+        padding: 0;
+    }
+    
+    .source-highlight::after {
+        display: none;
+    }
+    
+    #source-synthesis-panel {
+        display: none !important;
+    }
+}
+
+/* Empty state */
+#source-list:empty::before {
+    content: "No sources defined yet. Click 'Add Source' to get started.";
+    display: block;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 20px;
+}
+
+/* Color picker enhancement */
+.source-row input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.source-row input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 3px;
+}

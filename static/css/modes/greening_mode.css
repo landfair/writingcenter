@@ -1,0 +1,283 @@
+/**
+ * Greening Mode CSS
+ * Styles for John McPhee's editing practice mode
+ */
+
+/* Editor state during greening */
+.editor-content #editor.greening-mode {
+    user-select: text;
+    cursor: text;
+}
+
+.editor-content #editor.greening-mode:focus {
+    outline: 2px solid #4caf50;
+    outline-offset: 2px;
+}
+
+/* Selected text for deletion */
+.greening-selected {
+    background-color: rgba(76, 175, 80, 0.3) !important;
+    border-bottom: 2px solid #4caf50 !important;
+    cursor: pointer !important;
+    padding: 1px 2px !important;
+    border-radius: 2px !important;
+    transition: all 0.2s ease !important;
+    position: relative !important;
+}
+
+.greening-selected:hover {
+    background-color: rgba(76, 175, 80, 0.5) !important;
+    border-bottom-color: #388e3c !important;
+}
+
+.greening-selected:before {
+    content: "✕";
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    line-height: 16px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.greening-selected:hover:before {
+    opacity: 1;
+}
+
+/* Goal setting modal backdrop */
+.greening-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(2px);
+}
+
+/* Goal setting modal */
+.greening-modal {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Modal form elements */
+.greening-modal input[type="radio"] {
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.greening-modal input[type="number"] {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 14px;
+    width: auto;
+    min-width: 60px;
+}
+
+.greening-modal input[type="number"]:focus {
+    outline: none;
+    border-color: #57068c;
+    box-shadow: 0 0 0 2px rgba(87, 6, 140, 0.1);
+}
+
+.greening-modal label {
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+}
+
+.greening-modal label:hover {
+    color: #57068c;
+}
+
+/* Modal buttons */
+.greening-modal button {
+    transition: all 0.2s ease;
+}
+
+.greening-modal button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.greening-modal button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Toolbar controls */
+.greening-mode-options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.greening-goal-status {
+    background-color: #f4ebfa;
+    color: #57068c;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid #57068c;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.greening-goal-status.goal-met {
+    background-color: #e8f5e8;
+    color: #2e7d32;
+    border-color: #4caf50;
+}
+
+.greening-btn {
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.greening-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.greening-btn:active {
+    transform: translateY(0);
+}
+
+.greening-btn i {
+    font-size: 11px;
+}
+
+.greening-progress {
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .greening-modal {
+        width: 95%;
+        margin: 10px;
+    }
+    
+    .greening-mode-options {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    
+    .greening-goal-status {
+        text-align: center;
+    }
+    
+    .greening-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .greening-progress {
+        text-align: center;
+        margin-left: 0 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .greening-modal {
+        border-radius: 8px;
+    }
+    
+    .greening-selected:before {
+        display: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .greening-selected {
+        background-color: rgba(76, 175, 80, 0.6) !important;
+        border-bottom-width: 3px !important;
+    }
+    
+    .greening-goal-status {
+        border-width: 2px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .greening-selected,
+    .greening-btn,
+    .greening-goal-status,
+    .greening-modal button {
+        transition: none;
+    }
+    
+    .greening-modal {
+        animation: none;
+    }
+    
+    .greening-btn:hover,
+    .greening-modal button:hover {
+        transform: none;
+    }
+}
+
+/* Print styles */
+@media print {
+    .greening-selected {
+        background-color: transparent !important;
+        border-bottom: 2px solid #000 !important;
+    }
+    
+    .greening-selected:before {
+        display: none;
+    }
+    
+    .greening-modal-backdrop,
+    .greening-modal {
+        display: none !important;
+    }
+}

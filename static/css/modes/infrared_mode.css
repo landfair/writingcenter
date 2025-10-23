@@ -1,0 +1,254 @@
+/* Infrared Mode Styles */
+
+/* Infrared highlighting */
+.infrared-highlight {
+    padding: 1px 2px;
+    border-radius: 2px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: help;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.infrared-highlight:hover {
+    transform: scale(1.05);
+    z-index: 10;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Stats container */
+.infrared-stats-container {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Description styling */
+.infrared-description {
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    line-height: 1.3;
+    max-width: 400px;
+}
+
+/* Pattern selector styling */
+#infrared-pattern-select,
+#infrared-pattern-selector {
+    max-width: 200px;
+    margin-right: 10px;
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 14px;
+}
+
+/* Mode option styling */
+.infrared-mode-options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Toolbar selector */
+.toolbar-selector {
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toolbar-selector:focus {
+    outline: none;
+    border-color: #57068c;
+    box-shadow: 0 0 0 2px rgba(87, 6, 140, 0.1);
+}
+
+/* Mode stats styling */
+#infrared-stats {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* Pattern-specific colors */
+.infrared-highlight.jargon {
+    background-color: #8B0000;
+    color: white;
+}
+
+.infrared-highlight.nuance {
+    background-color: #B22222;
+    color: white;
+}
+
+/* Animation for newly highlighted words */
+@keyframes infraredGlow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(139, 0, 0, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(139, 0, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(139, 0, 0, 0);
+    }
+}
+
+.infrared-highlight.newly-highlighted {
+    animation: infraredGlow 1s ease-out;
+}
+
+/* Responsive adjustments for infrared mode */
+@media (max-width: 768px) {
+    .infrared-stats-container {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 100%;
+    }
+    
+    .infrared-description {
+        font-size: 0.8rem;
+    }
+    
+    #infrared-pattern-select,
+    #infrared-pattern-selector {
+        max-width: 150px;
+    }
+    
+    .infrared-mode-options {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    
+    .toolbar-selector {
+        width: 100%;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .infrared-highlight {
+        border: 1px solid #000;
+        font-weight: 600;
+    }
+    
+    .infrared-highlight.jargon {
+        background-color: #000;
+        color: #fff;
+    }
+    
+    .infrared-highlight.nuance {
+        background-color: #333;
+        color: #fff;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .infrared-highlight {
+        transition: none;
+    }
+    
+    .infrared-highlight:hover {
+        transform: none;
+    }
+    
+    .infrared-highlight.newly-highlighted {
+        animation: none;
+    }
+    
+    .toolbar-selector {
+        transition: none;
+    }
+}
+
+/* Dark theme adjustments */
+@media (prefers-color-scheme: dark) {
+    .infrared-description {
+        color: #ccc;
+    }
+    
+    .toolbar-selector {
+        background-color: #333;
+        color: white;
+        border-color: #555;
+    }
+    
+    .toolbar-selector:focus {
+        border-color: #57068c;
+    }
+}
+
+/* Print styles */
+@media print {
+    .infrared-highlight {
+        background-color: #f0f0f0 !important;
+        color: #000 !important;
+        border: 1px solid #ccc;
+        box-shadow: none;
+    }
+    
+    .infrared-highlight:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .infrared-stats-container,
+    .infrared-description {
+        display: none;
+    }
+}
+
+/* Focus styles for accessibility */
+.infrared-highlight:focus {
+    outline: 2px solid #57068c;
+    outline-offset: 2px;
+}
+
+/* Tooltip-like effect on hover */
+.infrared-highlight::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+}
+
+.infrared-highlight:hover::after {
+    opacity: 1;
+}
+
+/* Ensure tooltips don't break layout */
+.infrared-highlight {
+    position: relative;
+}
+
+/* Special styling for multi-word phrases */
+.infrared-highlight.phrase {
+    border-bottom: 2px solid currentColor;
+    background-color: transparent;
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: currentColor;
+    text-decoration-style: wavy;
+}

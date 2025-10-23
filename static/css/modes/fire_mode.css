@@ -1,0 +1,219 @@
+/* Fire Mode Styles */
+
+/* Fire Mode Background */
+.fire-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 187, 153, 0.1) 0%, rgba(255, 136, 68, 0.1) 50%, rgba(232, 97, 45, 0.1) 100%);
+    z-index: -1;
+    pointer-events: none;
+    animation: fire-pulse 3s infinite alternate;
+    border-radius: 8px;
+}
+
+@keyframes fire-pulse {
+    0% { opacity: 0.5; }
+    100% { opacity: 0.8; }
+}
+
+/* Remove margins in Fire mode to avoid interference */
+.fire-mode p,
+.fire-mode div,
+.fire-mode h1,
+.fire-mode h2,
+.fire-mode h3,
+.fire-mode h4,
+.fire-mode h5,
+.fire-mode h6 {
+    margin-bottom: 0;
+}
+
+/* Selectable sentences */
+.fire-sentence {
+    cursor: pointer;
+    padding: 0 2px;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+    display: inline;
+}
+
+.fire-sentence:hover {
+    background-color: rgba(255, 136, 68, 0.1);
+}
+
+/* Selected key sentences */
+.fire-sentence.fire-selected {
+    background-color: rgba(255, 136, 68, 0.2);
+    box-shadow: 0 0 0 1px rgba(232, 97, 45, 0.3);
+}
+
+/* Override hover and cursor in restructuring mode */
+.fire-restructuring .fire-sentence {
+    cursor: text;
+}
+
+.fire-restructuring .fire-sentence:hover {
+    background-color: transparent;
+}
+
+/* Keep the highlighting for selected sentences in restructuring mode */
+.fire-restructuring .fire-sentence.fire-selected {
+    background-color: rgba(255, 136, 68, 0.2);
+    box-shadow: 0 0 0 1px rgba(232, 97, 45, 0.3);
+}
+
+/* Target positions */
+.fire-sentence.fire-target-position {
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.2);
+}
+
+/* Selected sentences in target positions */
+.fire-sentence.fire-selected.fire-target-position {
+    background-color: rgba(255, 136, 68, 0.3);
+    box-shadow: 0 0 0 1px rgba(232, 97, 45, 0.5);
+    border-bottom: 2px solid rgba(232, 97, 45, 0.5);
+}
+
+/* Fire Mode UI elements */
+.fire-stage-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    color: #E8612D;
+}
+
+.fire-counter {
+    background-color: rgba(255, 136, 68, 0.1);
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-left: 15px;
+    font-size: 0.9rem;
+    color: #E8612D;
+}
+
+/* Fire mode toolbar buttons */
+.fire-mode-btn {
+    background: #E8612D;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.fire-mode-btn:hover {
+    background: #d4551f;
+}
+
+.fire-mode-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Fire mode toolbar group */
+.fire-toolbar-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Selection stage styles */
+.fire-mode.selection-stage .fire-sentence {
+    transition: all 0.2s ease;
+}
+
+.fire-mode.selection-stage .fire-sentence:hover {
+    background-color: rgba(255, 136, 68, 0.15);
+    transform: scale(1.02);
+}
+
+/* Restructuring stage styles */
+.fire-mode.restructuring-stage {
+    background: rgba(255, 187, 153, 0.05);
+}
+
+/* Focus states for accessibility */
+.fire-sentence:focus {
+    outline: 2px solid #E8612D;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .fire-sentence.fire-selected {
+        background-color: rgba(255, 136, 68, 0.4);
+        box-shadow: 0 0 0 2px rgba(232, 97, 45, 0.8);
+    }
+    
+    .fire-background {
+        opacity: 0.3;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .fire-background {
+        animation: none;
+    }
+    
+    .fire-sentence {
+        transition: none;
+    }
+    
+    .fire-sentence:hover {
+        transform: none;
+    }
+}
+
+/* Mobile responsive design */
+@media (max-width: 768px) {
+    .fire-sentence {
+        padding: 2px 4px;
+        min-height: 24px;
+        display: inline-block;
+    }
+    
+    .fire-counter {
+        margin-left: 5px;
+        font-size: 0.8rem;
+    }
+    
+    .fire-stage-indicator {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .fire-toolbar-group {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    
+    .fire-mode-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .fire-background {
+        display: none;
+    }
+    
+    .fire-sentence.fire-selected {
+        background-color: #f0f0f0 !important;
+        box-shadow: none !important;
+        border-bottom: 1px solid #000 !important;
+    }
+}

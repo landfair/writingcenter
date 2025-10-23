@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ document.title|default:"Untitled Document" }} - Writing Center{% endblock %}
+
+{% block content %}
+    <!-- Trigger area at the very left edge -->
+    <div class="sidebar-trigger" role="button" aria-label="Toggle document list sidebar" tabindex="0"></div>
+
+    <!-- Sidebar with fixed position to overlay -->
+    <div class="sidebar" id="documents-sidebar" role="navigation" aria-label="Document list">
+        <div class="sidebar-header">
+            <h3>My Documents</h3>
+        </div>
+        <ul class="document-list" id="document-list" aria-labelledby="sidebar-heading">
+            {% for doc in documents %}
+                <li class="document-item {% if doc.id == document.id %}active{% endif %}" 
+                    data-document-id="{{ doc.id }}" 
+                    role="button" 
+                    aria-label="Open {{ doc.title }}">
+                    <div class="doc-title">{{ doc.title }}</div>
+                    <div class="doc-date">{{ doc.updated_at|date:"M d, Y" }}</div>
+                </li>
+            {% empty %}
+                <li class="document-item">
+                    <div class="doc-title">No documents yet</div>
+                    <div class="doc-date">Create your first document</div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Platform container shifted right -->
+    <div class="platform-container" role="main" aria-labelledby="document-title">
+        <!-- The editor container now takes full width of platform -->
+        <div class="editor-container">
+            <!-- Toolbar -->
+            <div class="editor-toolbar" role="toolbar" aria-label="Formatting tools">
+                <div class="toolbar-title" id="document-title">{{ document.title|default:"Untitled Document" }}</div>
+                
+                <div class="toolbar-group" role="group" aria-label="Text formatting">
+                    <button class="toolbar-btn" title="Bold" onclick="formatText('bold')" aria-label="Bold">
+                        <i class="fas fa-bold" aria-hidden="true"></i>
+                    </button>
+                    <button class="toolbar-btn" title="Italic" onclick="formatText('italic')" aria-label="Italic">
+                        <i class="fas fa-italic" aria-hidden="true"></i>
+                    </button>
+                    <button class="toolbar-btn" title="Underline" onclick="formatText('underline')" aria-label="Underline">
+                        <i class="fas fa-underline" aria-hidden="true"></i>
+                    </button>
+                </div>
+                
+                <div class="toolbar-separator" aria-hidden="true"></div>
+                
+                <div class="toolbar-group" role="group" aria-label="Headings">
+                    <button class="toolbar-btn" title="Heading 1" onclick="formatText('h1')" aria-label="Heading 1">H1</button>
+                    <button class="toolbar-btn" title="Heading 2" onclick="formatText('h2')" aria-label="Heading 2">H2</button>
+                    <button class="toolbar-btn" title="Heading 3" onclick="formatText('h3')" aria-label="Heading 3">H3</button>
+                </div>
+                
+                <div class="toolbar-separator" aria-hidden="true"></div>
+                
+                <div class="toolbar-group" role="group" aria-label="Document actions">
+                    <button class="toolbar-btn" title="Save" onclick="saveDocument()" aria-label="Save document">
+                        <i class="fas fa-save" aria-hidden="true"></i> Save
+                    </button>
+                    <button class="toolbar-btn" title="Download" onclick="downloadDocument()" aria-label="Download document">
+                        <i class="fas fa-download" aria-hidden="true"></i>
+                    </button>
+                </div>
+                
+                <div class="toolbar-separator" aria-hidden="true"></div>
+
+                <button class="toolbar-btn" id="trapdoor-btn" title="Move selected text to Scrapheap" aria-label="Move selected text to Scrapheap">
+                    <i class="fas fa-trash-restore-alt"></i>
+                </button>
+
+                <!-- Modes toggle button with ARIA support -->
+                <div class="modes-toggle-section">
+                    <button id="modes-toggle-btn" class="modes-toggle-btn" title="Open Writing Modes Panel" aria-label="Open writing modes panel" aria-expanded="false" aria-controls="modes-panel">
+                        <i class="fas fa-layer-group" aria-hidden="true"></i> Modes
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Second toolbar row with ARIA support -->
+            <div class="editor-toolbar-modes" role="region" aria-label="Active mode controls">
+                <div id="active-mode-indicator" class="active-mode-indicator" aria-live="polite">
+                    <span id="active-mode-name">No mode active</span>
+                    
+                    <!-- Options container for mode-specific controls -->
+                    <div id="active-mode-options" class="active-mode-options" role="group" aria-label="Mode options">
+                        <!-- Will be populated dynamically based on active mode -->
+                    </div>
+                    
+                    <button id="disable-mode-btn" class="disable-mode-btn" aria-label="Disable current mode">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="editor-content">
+                <div id="editor" 
+                     contenteditable="true" 
+                     role="textbox" 
+                     aria-multiline="true" 
+                     aria-label="Document content editor" 
+                     placeholder="Start writing here..."
+                     data-document-id="{{ document.id|default:'' }}">{{ document.content|default:""|safe }}</div>
+            </div>
+            
+            <div class="status-bar" role="status" aria-live="polite">
+                <div id="word-count">Words: 0</div>
+                <div id="last-saved">Last saved: {% if document.updated_at %}{{ document.updated_at|date:"M d, Y H:i" }}{% else %}Never{% endif %}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals and other elements will be included here -->
+    {% include 'core/modals.html' %}
+    {% include 'writing_modes_panel.html' %}
+
+    <!-- Notification -->
+    <div class="notification" id="notification" role="alert" aria-live="assertive">
+        <i class="fas fa-check-circle" aria-hidden="true"></i>
+        <span id="notification-message">Document saved successfully!</span>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/core.js' %}"></script>
+    <script src="{% static 'js/editor.js' %}"></script>
+    <script src="{% static 'js/modes.js' %}"></script>
+    <script src="{% static 'js/modes/textris_mode.js' %}"></script>
+    <script src="{% static 'js/modes/fire_mode.js' %}"></script>
+    <script src="{% static 'js/modes/reader_mode.js' %}"></script>
+    <script src="{% static 'js/modes/meta_mode.js' %}"></script>
+    <script src="{% static 'js/modes/key_terms_mode.js' %}"></script>
+    <script src="{% static 'js/modes/infrared_mode.js' %}"></script>
+    <script src="{% static 'js/modes/pomodoro_mode.js' %}"></script>
+    <script src="{% static 'js/modes/greening_mode.js' %}"></script>
+    <script src="{% static 'js/modes/source_synthesis_mode.js' %}"></script>
+    <script src="{% static 'js/modes/audience_mode.js' %}"></script>
+    <script src="{% static 'js/modes/word_cloud_mode.js' %}"></script>
+    <script src="{% static 'js/writing_modes.js' %}"></script>
+    <script src="{% static 'js/google_drive.js' %}"></script>
+    <script>
+        // Initialize with document data
+        const DOCUMENT_ID = '{{ document.id|default:"" }}';
+        const CSRF_TOKEN = '{{ csrf_token }}';
+        
+        // Initialize the editor when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeEditor();
+            updateWordCount();
+        });
+    </script>
+{% endblock %}

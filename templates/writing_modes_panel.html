@@ -1,0 +1,213 @@
+<!-- Writing Modes Panel -->
+<div id="modes-panel" class="modes-panel" role="dialog" aria-labelledby="modes-panel-title" aria-hidden="true">
+    <div class="modes-panel-header">
+        <h3 id="modes-panel-title">Writing Modes</h3>
+        <button id="close-modes-panel" class="close-panel-btn" aria-label="Close modes panel">
+            <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="modes-panel-body">
+        
+        <!-- Organization & Structure category -->
+        <div class="modes-category">
+            <h4 id="organization-modes-heading">Organization & Structure</h4>
+            <div class="modes-list" role="list" aria-labelledby="organization-modes-heading">
+                
+                <!-- Textris Mode -->
+                <div class="mode-card" data-mode="textris" role="listitem">
+                    <div class="mode-card-header">
+                        <i class="fas fa-grip-lines" aria-hidden="true"></i>
+                        <h5>Textris Mode</h5>
+                    </div>
+                    <p class="mode-description">Rearrange paragraphs and sentences by dragging them.</p>
+                    <div class="mode-options">
+                        <select id="textris-panel-select" class="mode-select" aria-label="Textris mode level">
+                            <option value="paragraph">Paragraphs</option>
+                            <option value="sentence">Sentences</option>
+                        </select>
+                        <button class="activate-mode-btn" aria-label="Activate Textris mode">Activate</button>
+                    </div>
+                </div>
+                
+                <!-- Source Synthesis Mode -->
+                <div class="mode-card" data-mode="sourceSynthesis" role="listitem">
+                    <div class="mode-card-header">
+                        <i class="fas fa-layer-group" aria-hidden="true"></i>
+                        <h5>Source Synthesis Mode</h5>
+                    </div>
+                    <p class="mode-description">Track how your sources interact throughout your document. Identify whether you're reporting sources individually or creating rich conversations between them.</p>
+                    <div class="mode-options">
+                        <button class="activate-mode-btn" aria-label="Activate Source Synthesis mode">Activate</button>
+                    </div>
+                </div>
+                
+                <!-- Fire Mode -->
+                <div class="mode-card" data-mode="fire" role="listitem">
+                    <div class="mode-card-header">
+                        <i class="fas fa-fire" aria-hidden="true"></i>
+                        <h5>Fire Mode</h5>
+                    </div>
+                    <p class="mode-description">Identify and position your most important sentences for maximum impact.</p>
+                    <div class="mode-options">
+                        <button class="activate-mode-btn" aria-label="Activate Fire mode">Activate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Analysis & Reflection category -->
+        <div class="modes-category">
+            <h4 id="analysis-modes-heading">Analysis & Reflection</h4>
+            <div class="modes-list" role="list" aria-labelledby="analysis-modes-heading">
+                
+                <!-- Reader Mode -->
+                <div class="mode-card" data-mode="reader" role="listitem">
+                    <div class="mode-card-header">
+                        <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                        <h5>Reader Mode</h5>
+                    </div>
+                    <p class="mode-description">Glimpse your writing through your readers' eyes.</p>
+                    <div class="mode-options">
+                        <button class="activate-mode-btn" aria-label="Activate Reader mode">Activate</button>
+                    </div>
+                </div>
+                
+                <!-- Meta Mode -->
+                <div class="mode-card" data-mode="meta" role="listitem">
+                    <div class="mode-card-header">
+                        <i class="fas fa-sitemap" aria-hidden="true"></i>
+                        <h5>Meta Mode</h5>
+                    </div>
+                    <p class="mode-description">Analyze what each paragraph says (content) and does (function) in your document.</p>
+                    <div class="mode-options">
+                        <button class="activate-mode-btn" aria-label="Activate Meta mode">Activate</button>
+                    </div>
+                </div>
+                
+                <!-- Audience Perspective Mode -->
+                <div class="mode-card" data-mode="audience" role="listitem">
+                    <div class="mode-card-header">
+                        <i class="fas fa-users" aria-hidden="true"></i>
+                        <h5>Audience Perspective Mode</h5>
+                    </div>
+                    <p class="mode-description">View your writing through different reader personas and add targeted feedback.</p>
+                    <div class="mode-options">
+                        <button class="activate-mode-btn" aria-label="Activate Audience Perspective mode">Activate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Clarity & Concision category -->
+        <div class="modes-category">
+            <h4 id="clarity-modes-heading">Clarity & Concision</h4>
+            <div class="modes-list" role="list" aria-labelledby="clarity-modes-heading">
+                
+                <!-- Greening Mode -->
+                <div class="mode-card" data-mode="greening" role="listitem">
+                    <div class="mode-card-header">
+                        <i class="fas fa-cut" aria-hidden="true"></i>
+                        <h5>Greening Mode</h5>
+                    </div>
+                    <p class="mode-description">Systematically reduce your text to meet length constraints while preserving voice and meaning. Based on John McPhee's editing practice of "greening" lines to fit publishing requirements.</p>
+                    <div class="mode-options">
+                        <button class="activate-mode-btn" aria-label="Activate Greening mode">Activate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Focus & Depth category -->
+        <div class="modes-category">
+            <h4 id="focus-modes-heading">Focus & Depth</h4>
+            <div class="modes-list" role="list" aria-labelledby="focus-modes-heading">
+                
+                <!-- Key Terms Mode -->
+                <div class="mode-card" data-mode="keyTerms" role="listitem">
+                    <div class="mode-card-header">
+                        <i class="fas fa-highlighter" aria-hidden="true"></i>
+                        <h5>Key Terms Mode</h5>
+                    </div>
+                    <p class="mode-description">Highlight important terms and phrases in your document.</p>
+                    <div class="mode-options">
+                        <button class="activate-mode-btn" aria-label="Activate Key Terms mode">Activate</button>
+                    </div>
+                </div>
+                
+                <!-- Infrared Mode -->
+                <div class="mode-card" data-mode="infrared" role="listitem">
+                    <div class="mode-card-header">
+                        <i class="fas fa-eye" aria-hidden="true"></i>
+                        <h5>Infrared Mode</h5>
+                    </div>
+                    <p class="mode-description">Reveal hidden language patterns by highlighting jargon words, nuance markers, and other stylistic elements that may need attention.</p>
+                    <div class="mode-options">
+                        <select id="infrared-pattern-select" class="mode-select" aria-label="Infrared pattern type">
+                            <option value="jargon">Jargon Words (Latinate)</option>
+                            <option value="nuance">Nuance Words</option>
+                        </select>
+                        <button class="activate-mode-btn" aria-label="Activate Infrared mode">Activate</button>
+                    </div>
+                </div>
+                
+                <!-- Pomodoro Mode -->
+                <div class="mode-card" data-mode="pomodoro" role="listitem">
+                    <div class="mode-card-header">
+                        <i class="fas fa-clock" aria-hidden="true"></i>
+                        <h5>Pomodoro Mode</h5>
+                    </div>
+                    <p class="mode-description">Manage tasks and work in focused intervals with customizable breaks.</p>
+                    <div class="mode-options">
+                        <button class="activate-mode-btn" aria-label="Activate Pomodoro mode">Activate</button>
+                    </div>
+                </div>
+                
+                <!-- Word Cloud Mode -->
+                <div class="mode-card" data-mode="wordCloud" role="listitem">
+                    <div class="mode-card-header">
+                        <i class="fas fa-cloud" aria-hidden="true"></i>
+                        <h5>Word Cloud Mode</h5>
+                    </div>
+                    <p class="mode-description">Generate a visual word cloud of your document to analyze word frequency patterns and identify overused or underused terms.</p>
+                    <div class="mode-options">
+                        <button class="activate-mode-btn" aria-label="Activate Word Cloud mode">Activate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Coming Soon category -->
+        <div class="modes-category">
+            <h4 id="coming-soon-heading">Coming Soon</h4>
+            <div class="modes-list" role="list" aria-labelledby="coming-soon-heading">
+                
+                <!-- Style Analyzer -->
+                <div class="mode-card disabled" role="listitem" aria-disabled="true">
+                    <div class="mode-card-header">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <h5>Style Analyzer</h5>
+                    </div>
+                    <p class="mode-description">Identify patterns in your writing style.</p>
+                    <div class="mode-options">
+                        <button class="activate-mode-btn" disabled aria-label="Style Analyzer (coming soon)">Coming Soon</button>
+                    </div>
+                </div>
+                
+                <!-- Feedback Mode -->
+                <div class="mode-card disabled" role="listitem" aria-disabled="true">
+                    <div class="mode-card-header">
+                        <i class="fas fa-comments" aria-hidden="true"></i>
+                        <h5>Feedback Mode</h5>
+                    </div>
+                    <p class="mode-description">Add and manage comments on your document.</p>
+                    <div class="mode-options">
+                        <button class="activate-mode-btn" disabled aria-label="Feedback Mode (coming soon)">Coming Soon</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Overlay for the panel -->
+<div id="modes-panel-overlay" class="modes-panel-overlay" aria-hidden="true"></div>

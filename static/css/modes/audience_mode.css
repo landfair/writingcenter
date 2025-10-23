@@ -1,0 +1,607 @@
+/**
+ * Audience Mode CSS
+ * Styles for audience perspective annotations and feedback
+ */
+
+/* Editor state during audience mode */
+.editor-content #editor.audience-mode {
+    user-select: text;
+    cursor: text;
+}
+
+/* Highlight styles for different personas */
+.audience-highlight {
+    display: inline;
+    position: relative;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    padding: 1px 2px;
+}
+
+.audience-highlight:hover {
+    filter: brightness(0.9);
+    transform: translateY(-1px);
+}
+
+/* Expert reader - Purple */
+.expert-highlight {
+    background-color: rgba(155, 89, 182, 0.15);
+    border-bottom: 2px solid #9b59b6;
+}
+
+.expert-highlight:hover {
+    background-color: rgba(155, 89, 182, 0.25);
+}
+
+/* Novice reader - Blue */
+.novice-highlight {
+    background-color: rgba(52, 152, 219, 0.15);
+    border-bottom: 2px solid #3498db;
+}
+
+.novice-highlight:hover {
+    background-color: rgba(52, 152, 219, 0.25);
+}
+
+/* Skeptical reader - Orange */
+.skeptical-highlight {
+    background-color: rgba(230, 126, 34, 0.15);
+    border-bottom: 2px solid #e67e22;
+}
+
+.skeptical-highlight:hover {
+    background-color: rgba(230, 126, 34, 0.25);
+}
+
+/* Time-constrained reader - Green */
+.timeconstrained-highlight {
+    background-color: rgba(46, 204, 113, 0.15);
+    border-bottom: 2px solid #2ecc71;
+}
+
+.timeconstrained-highlight:hover {
+    background-color: rgba(46, 204, 113, 0.25);
+}
+
+/* Generous reader - Yellow */
+.generous-highlight {
+    background-color: rgba(241, 196, 15, 0.15);
+    border-bottom: 2px solid #f1c40f;
+}
+
+.generous-highlight:hover {
+    background-color: rgba(241, 196, 15, 0.25);
+}
+
+/* Annotation interface container */
+.audience-annotation-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    max-width: 90vw;
+    z-index: 1010;
+    overflow: hidden;
+    animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.audience-annotation-header {
+    padding: 10px 15px;
+    background-color: #f4f4f4;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#audience-annotation-title {
+    font-weight: 600;
+    color: #333;
+}
+
+.audience-close-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.audience-close-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #333;
+    transform: scale(1.1);
+}
+
+/* Persona selector section */
+.audience-annotation-personas {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    gap: 5px;
+}
+
+.audience-persona-selector {
+    padding: 5px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid transparent;
+}
+
+.audience-persona-selector i {
+    font-size: 12px;
+}
+
+.audience-persona-selector:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.audience-persona-selector.active {
+    font-weight: 600;
+    border-width: 1px;
+    border-style: solid;
+}
+
+/* Persona-specific styles */
+.expert-persona {
+    color: #9b59b6;
+    background-color: rgba(155, 89, 182, 0.1);
+}
+
+.expert-persona.active {
+    background-color: rgba(155, 89, 182, 0.2);
+    border-color: #9b59b6;
+}
+
+.novice-persona {
+    color: #3498db;
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.novice-persona.active {
+    background-color: rgba(52, 152, 219, 0.2);
+    border-color: #3498db;
+}
+
+.skeptical-persona {
+    color: #e67e22;
+    background-color: rgba(230, 126, 34, 0.1);
+}
+
+.skeptical-persona.active {
+    background-color: rgba(230, 126, 34, 0.2);
+    border-color: #e67e22;
+}
+
+.timeconstrained-persona {
+    color: #2ecc71;
+    background-color: rgba(46, 204, 113, 0.1);
+}
+
+.timeconstrained-persona.active {
+    background-color: rgba(46, 204, 113, 0.2);
+    border-color: #2ecc71;
+}
+
+.generous-persona {
+    color: #f1c40f;
+    background-color: rgba(241, 196, 15, 0.1);
+}
+
+.generous-persona.active {
+    background-color: rgba(241, 196, 15, 0.2);
+    border-color: #f1c40f;
+}
+
+/* Annotation content textarea */
+#audience-annotation-content {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    resize: vertical;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+#audience-annotation-content:focus {
+    outline: none;
+    border-color: #57068c;
+    box-shadow: inset 0 0 0 1px rgba(87, 6, 140, 0.2);
+}
+
+#audience-annotation-content::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Annotation footer buttons */
+.audience-annotation-footer {
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.audience-annotation-footer button {
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.audience-annotation-footer button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#audience-annotation-cancel {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    color: #333;
+}
+
+#audience-annotation-cancel:hover {
+    background-color: #e4e4e4;
+    border-color: #ccc;
+}
+
+#audience-annotation-save {
+    background-color: #57068c;
+    color: white;
+}
+
+#audience-annotation-save:hover {
+    background-color: #4a0575;
+}
+
+/* Annotation popup styles */
+.audience-annotation-popup {
+    position: absolute;
+    margin: 8px 0;
+    border-radius: 8px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    max-width: 90vw;
+    font-size: 14px;
+    overflow: hidden;
+    z-index: 1500;
+    background-color: white;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(-5px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.audience-annotation-popup .audience-annotation-header {
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.audience-popup-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 5px;
+}
+
+.audience-popup-close,
+.audience-annotation-edit,
+.audience-annotation-delete {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    padding: 0;
+    font-size: 12px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.audience-popup-close:hover,
+.audience-annotation-edit:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #666;
+}
+
+.audience-annotation-delete:hover {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: #f44336;
+}
+
+/* Persona-specific popup headers */
+.expert-annotation .audience-annotation-header {
+    background-color: rgba(155, 89, 182, 0.1);
+    color: #9b59b6;
+}
+
+.novice-annotation .audience-annotation-header {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+}
+
+.skeptical-annotation .audience-annotation-header {
+    background-color: rgba(230, 126, 34, 0.1);
+    color: #e67e22;
+}
+
+.timeconstrained-annotation .audience-annotation-header {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: #2ecc71;
+}
+
+.generous-annotation .audience-annotation-header {
+    background-color: rgba(241, 196, 15, 0.1);
+    color: #f1c40f;
+}
+
+.audience-annotation-popup .audience-annotation-content {
+    padding: 10px;
+    background-color: white;
+    line-height: 1.4;
+}
+
+/* Toolbar integration styles */
+.audience-mode-options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.audience-status {
+    background-color: #f4ebfa;
+    color: #57068c;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid #57068c;
+}
+
+.audience-btn {
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.audience-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.audience-btn i {
+    font-size: 11px;
+}
+
+.audience-stats {
+    color: #666;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+/* Persona guidance panel */
+.audience-guidance-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+    border-radius: 6px 6px 0 0;
+}
+
+.audience-guidance-prompts {
+    padding: 15px;
+    background-color: white;
+    border-radius: 0 0 6px 6px;
+    border: 1px solid #e9ecef;
+    border-top: none;
+}
+
+.audience-prompt {
+    padding: 8px 12px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.4;
+    border-left: 3px solid #57068c;
+}
+
+.audience-prompt:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .audience-annotation-container {
+        width: 95%;
+    }
+    
+    .audience-annotation-personas {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .audience-persona-selector {
+        justify-content: center;
+        padding: 8px 12px;
+    }
+    
+    .audience-annotation-popup {
+        width: 90vw;
+        max-width: 300px;
+    }
+    
+    .audience-mode-options {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    
+    .audience-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .audience-stats {
+        text-align: center;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .audience-annotation-container {
+        border-radius: 6px;
+    }
+    
+    .audience-annotation-footer {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .audience-annotation-footer button {
+        width: 100%;
+    }
+    
+    .audience-prompt {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .audience-highlight {
+        border-bottom-width: 3px;
+    }
+    
+    .audience-persona-selector.active {
+        border-width: 2px;
+    }
+    
+    .audience-status {
+        border-width: 2px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .audience-highlight,
+    .audience-persona-selector,
+    .audience-btn,
+    .audience-annotation-container,
+    .audience-annotation-popup {
+        transition: none;
+        animation: none;
+    }
+    
+    .audience-highlight:hover,
+    .audience-persona-selector:hover,
+    .audience-btn:hover {
+        transform: none;
+    }
+}
+
+/* Print styles */
+@media print {
+    .audience-highlight {
+        background-color: transparent !important;
+        border-bottom: 2px solid #000;
+        padding: 0;
+    }
+    
+    .audience-annotation-container,
+    .audience-annotation-popup {
+        display: none !important;
+    }
+    
+    .audience-guidance-header,
+    .audience-guidance-prompts {
+        display: none !important;
+    }
+}
+
+/* Focus styles for accessibility */
+.audience-persona-selector:focus,
+.audience-btn:focus,
+#audience-annotation-content:focus,
+.audience-annotation-footer button:focus {
+    outline: 2px solid #57068c;
+    outline-offset: 2px;
+}
+
+/* Dark mode support (if implemented) */
+@media (prefers-color-scheme: dark) {
+    .audience-annotation-container,
+    .audience-annotation-popup {
+        background-color: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .audience-annotation-header {
+        background-color: #4a5568;
+        border-color: #718096;
+    }
+    
+    #audience-annotation-content {
+        background-color: #2d3748;
+        color: #e2e8f0;
+        border-color: #718096;
+    }
+    
+    .audience-annotation-popup .audience-annotation-content {
+        background-color: #2d3748;
+    }
+}

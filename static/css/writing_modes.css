@@ -1,0 +1,273 @@
+/* Writing Modes Panel Styles */
+
+/* Modes Panel */
+.modes-panel-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1003;
+}
+
+.modes-panel {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1004;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.modes-panel.visible {
+    display: flex;
+}
+
+.modes-panel-overlay.visible {
+    display: block;
+}
+
+.modes-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 2px solid #f4ebfa;
+}
+
+.modes-panel-header h3 {
+    color: #57068c;
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.close-panel-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #666;
+    cursor: pointer;
+}
+
+.close-panel-btn:hover {
+    color: #333;
+}
+
+.modes-panel-body {
+    padding: 15px 20px;
+    overflow-y: auto;
+    max-height: calc(80vh - 60px);
+}
+
+.modes-category {
+    margin-bottom: 25px;
+}
+
+.modes-category h4 {
+    color: #57068c;
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #f4ebfa;
+}
+
+.modes-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.mode-card {
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    transition: all 0.2s ease;
+    position: relative;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mode-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border-color: #ccc;
+}
+
+.mode-card.disabled {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.mode-card.active {
+    border-color: #57068c;
+    background-color: #fcf9ff;
+}
+
+.mode-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.mode-card-header i {
+    color: #57068c;
+    font-size: 1.2rem;
+}
+
+.mode-card-header h5 {
+    margin: 0;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.mode-description {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    flex-grow: 1;
+}
+
+.mode-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+.mode-select {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9rem;
+    max-width: 150px;
+    margin-right: auto;
+}
+
+.activate-mode-btn {
+    background-color: #57068c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.activate-mode-btn:hover {
+    background-color: #400667;
+}
+
+.activate-mode-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Modes Toggle Button */
+.modes-toggle-section {
+    display: flex;
+    align-items: center;
+}
+
+.modes-toggle-btn {
+    background-color: #57068c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.modes-toggle-btn:hover {
+    background-color: #400667;
+}
+
+.modes-toggle-btn i {
+    font-size: 0.9rem;
+}
+
+/* Active Mode Indicator */
+.active-mode-indicator {
+    display: none !important; /* Hidden by default, shown via JavaScript when mode is active */
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+}
+
+.active-mode-indicator.visible {
+    display: flex !important;
+}
+
+.disable-mode-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 2px;
+    font-size: 0.8rem;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: none; /* Initially hidden */
+}
+
+.disable-mode-btn:hover {
+    color: #333;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Second toolbar row styling */
+.editor-toolbar-modes {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 8px 15px;
+    background-color: #fafafa;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .modes-panel {
+        width: 95%;
+        max-height: 85vh;
+    }
+    
+    .modes-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .mode-options {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+    
+    .mode-select {
+        max-width: none;
+        margin-right: 0;
+    }
+}
+
+/* Mode-specific styles will be added by individual mode JavaScript files */

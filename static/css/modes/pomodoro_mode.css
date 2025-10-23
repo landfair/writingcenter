@@ -1,0 +1,228 @@
+/* Pomodoro Mode Styles */
+
+/* Toolbar indicator styles */
+.pomodoro-toolbar-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #57068c;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.pomodoro-toolbar-indicator i {
+    font-size: 16px;
+}
+
+/* Mode options container */
+.pomodoro-mode-options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Pomodoro status indicator */
+.pomodoro-status-indicator {
+    background-color: #f4ebfa;
+    color: #57068c;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid #57068c;
+}
+
+.pomodoro-status-indicator.running {
+    background-color: #57068c;
+    color: white;
+    animation: pomodoroRunning 2s ease-in-out infinite;
+}
+
+@keyframes pomodoroRunning {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Pomodoro buttons */
+.pomodoro-btn {
+    background-color: #57068c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pomodoro-btn:hover {
+    background-color: #400667;
+    transform: translateY(-1px);
+}
+
+.pomodoro-btn.secondary {
+    background-color: #f4ebfa;
+    color: #57068c;
+    border: 1px solid #57068c;
+}
+
+.pomodoro-btn.secondary:hover {
+    background-color: #e0d0eb;
+}
+
+/* Notification styles for Pomodoro */
+.pomodoro-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #57068c;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    max-width: 300px;
+    animation: slideInRight 0.3s ease;
+}
+
+.pomodoro-notification.success {
+    background-color: #2ecc71;
+}
+
+.pomodoro-notification.break {
+    background-color: #9b59b6;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Timer mini display in toolbar */
+.pomodoro-timer-mini {
+    background-color: #f5f5f7;
+    border: 1px solid #e6e6e6;
+    border-radius: 16px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.pomodoro-timer-mini .session-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #3498db;
+}
+
+.pomodoro-timer-mini.short-break .session-dot {
+    background-color: #2ecc71;
+}
+
+.pomodoro-timer-mini.long-break .session-dot {
+    background-color: #9b59b6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .pomodoro-mode-options {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    
+    .pomodoro-toolbar-indicator {
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+    }
+    
+    .pomodoro-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .pomodoro-notification {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .pomodoro-status-indicator {
+        border-width: 2px;
+    }
+    
+    .pomodoro-btn {
+        border: 2px solid transparent;
+    }
+    
+    .pomodoro-btn.secondary {
+        border: 2px solid #57068c;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .pomodoro-status-indicator.running {
+        animation: none;
+    }
+    
+    .pomodoro-btn:hover {
+        transform: none;
+    }
+    
+    .pomodoro-notification {
+        animation: none;
+    }
+    
+    @keyframes slideInRight {
+        from, to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+}
+
+/* Dark theme adjustments */
+@media (prefers-color-scheme: dark) {
+    .pomodoro-timer-mini {
+        background-color: #333;
+        border-color: #555;
+        color: white;
+    }
+    
+    .pomodoro-status-indicator {
+        background-color: #444;
+        border-color: #57068c;
+    }
+}
+
+/* Print styles */
+@media print {
+    .pomodoro-toolbar-indicator,
+    .pomodoro-mode-options,
+    .pomodoro-notification {
+        display: none;
+    }
+}

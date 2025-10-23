@@ -1,0 +1,55 @@
+<!-- New Document Modal with ARIA support -->
+<div class="modal" id="new-document-modal" role="dialog" aria-labelledby="new-doc-title-label" aria-hidden="true">
+    <div class="modal-content" role="document">
+        <div class="modal-header">
+            <div id="new-doc-title-label" class="modal-title">Create New Document</div>
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="new-doc-title" class="form-label">Document Title</label>
+                <input type="text" id="new-doc-title" class="form-input" placeholder="Enter document title">
+            </div>
+            <div class="form-group">
+                <label for="new-doc-description" class="form-label">Description (optional)</label>
+                <textarea id="new-doc-description" class="form-input" rows="3" placeholder="Enter optional description"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="action-btn" id="cancel-new-doc">Cancel</button>
+            <button class="action-btn primary" id="create-new-doc">Create</button>
+        </div>
+    </div>
+</div>
+
+<!-- User Profile Modal with ARIA support -->
+<div class="modal" id="user-profile-modal" role="dialog" aria-labelledby="user-profile-title" aria-hidden="true">
+    <div class="modal-content" role="document">
+        <div class="modal-header">
+            <div id="user-profile-title" class="modal-title">My Account</div>
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="user-name" class="form-label">Name</label>
+                <input type="text" id="user-name" class="form-input" value="{{ user.get_full_name|default:user.username }}">
+            </div>
+            <div class="form-group">
+                <label for="user-email" class="form-label">Email</label>
+                <input type="email" id="user-email" class="form-input" value="{{ user.email }}">
+            </div>
+            <div class="form-group">
+                <label for="user-preferences" class="form-label">Preferences</label>
+                <select id="user-preferences" class="form-input">
+                    <option value="default">Default Theme</option>
+                    <option value="light">Light Theme</option>
+                    <option value="dark">Dark Theme</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="action-btn" id="cancel-profile">Cancel</button>
+            <button class="action-btn primary" id="save-profile">Save Changes</button>
+        </div>
+    </div>
+</div>

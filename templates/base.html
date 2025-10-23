@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/lMAoVCW.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Writing Center dot org{% endblock %}</title>
+    
+    <!-- External Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Django Static Files -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pomodoro.css' %}">
+    <link rel="stylesheet" href="{% static 'css/writing_modes.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modes/textris_mode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modes/fire_mode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modes/reader_mode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modes/meta_mode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modes/key_terms_mode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modes/infrared_mode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modes/pomodoro_mode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modes/greening_mode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modes/source_synthesis_mode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modes/audience_mode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modes/word_cloud_mode.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header class="fixed-header" role="banner">
+        <div class="logo">
+            <a href="{% url 'core:home' %}" title="Home" aria-label="NYU Writing Center Home">
+                <img src="https://i.imgur.com/iIODsNl.png" alt="NYU Logo" />        
+            </a>
+        </div>
+        <div class="header-title" id="app-title">writing-center.org</div>
+        <div class="header-right">
+            {% if user.is_authenticated %}
+                <button id="new-document-btn" class="action-btn primary" aria-label="Create new document">
+                    <i class="fas fa-plus" aria-hidden="true"></i> New Document
+                </button>
+                <button id="user-profile-btn" class="action-btn" aria-label="Open user account settings">
+                    <i class="fas fa-user" aria-hidden="true"></i> {{ user.first_name|default:user.username }}
+                </button>
+                <a href="{% url 'account_logout' %}" class="action-btn">
+                    <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout
+                </a>
+            {% else %}
+                <a href="{% url 'account_login' %}" class="action-btn primary">
+                    <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login
+                </a>
+                <a href="{% url 'socialaccount_signup' %}" class="action-btn">
+                    <i class="fab fa-google" aria-hidden="true"></i> Sign up with Google
+                </a>
+            {% endif %}
+            
+            <button id="report-bug-btn" class="action-btn" aria-label="Report a bug">
+                <i class="fas fa-bug" aria-hidden="true"></i> Report Bug
+            </button>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <p>&copy; 2025 Alexander Landfair | NYU Online Writing Platform | All Rights Reserved</p>
+    </footer>
+
+    <!-- Include JavaScript -->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

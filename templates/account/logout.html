@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Sign Out - Writing Center{% endblock %}
+
+{% block extra_css %}
+<style>
+    .auth-container {
+        min-height: calc(100vh - 140px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #f8f8fa 0%, #f4ebfa 100%);
+        padding: 20px;
+    }
+
+    .auth-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(87, 6, 140, 0.1);
+        padding: 40px;
+        width: 100%;
+        max-width: 450px;
+        border: 1px solid rgba(87, 6, 140, 0.1);
+        text-align: center;
+    }
+
+    .auth-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        color: #57068c;
+        font-weight: 600;
+        margin-bottom: 16px;
+    }
+
+    .auth-subtitle {
+        color: #666;
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+
+    .logout-btn {
+        background: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-right: 12px;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    .logout-btn:hover {
+        background: #c0392b;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+    }
+
+    .cancel-btn {
+        background: #57068c;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: inline-block;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    .cancel-btn:hover {
+        background: #400667;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(87, 6, 140, 0.3);
+        color: white;
+        text-decoration: none;
+    }
+
+    .button-group {
+        margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .auth-card {
+            padding: 30px 20px;
+            margin: 10px;
+        }
+
+        .auth-title {
+            font-size: 1.75rem;
+        }
+
+        .logout-btn, .cancel-btn {
+            display: block;
+            width: 100%;
+            margin: 0 0 12px 0;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h1 class="auth-title">Sign Out</h1>
+        <p class="auth-subtitle">Are you sure you want to sign out of Writing Center?</p>
+        
+        <div class="button-group">
+            <form method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">
+                    <i class="fas fa-sign-out-alt" style="margin-right: 8px;"></i>
+                    Yes, Sign Out
+                </button>
+            </form>
+            <a href="{% url 'core:home' %}" class="cancel-btn">
+                <i class="fas fa-arrow-left" style="margin-right: 8px;"></i>
+                Cancel
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

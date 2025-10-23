@@ -1,0 +1,331 @@
+/* Meta Mode Styles */
+
+/* Modal Backdrop */
+.meta-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+/* Modal */
+.meta-modal {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 95%;
+    max-width: 1000px;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Modal Header */
+.meta-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 2px solid #f4ebfa;
+    background-color: #fcf9ff;
+}
+
+.meta-modal-header h3 {
+    margin: 0;
+    color: #57068c;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.meta-modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #666;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.meta-modal-close:hover {
+    background-color: rgba(87, 6, 140, 0.1);
+    color: #57068c;
+}
+
+/* Modal Content */
+.meta-modal-content {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+    background-color: #fafafa;
+}
+
+/* Paragraph Container */
+.meta-paragraph-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+    position: relative;
+}
+
+/* Paragraph Counter */
+#meta-paragraph-counter {
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background-color: #57068c;
+    color: white;
+    border-radius: 12px;
+    padding: 3px 12px;
+    font-weight: 500;
+    font-size: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Column Styles */
+.meta-says-column,
+.meta-does-column {
+    padding: 15px;
+    background-color: rgba(87, 6, 140, 0.03);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.meta-says-column {
+    border-left: 3px solid #57068c;
+}
+
+.meta-does-column {
+    border-right: 3px solid #57068c;
+}
+
+.meta-paragraph-column {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Column Headings */
+.meta-column-heading {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #57068c;
+    margin-bottom: 10px;
+}
+
+.meta-column-heading i {
+    margin-right: 8px;
+}
+
+/* Paragraph Content */
+#meta-paragraph-content {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Textareas */
+.meta-textarea {
+    flex: 1;
+    width: 100%;
+    min-height: 200px;
+    padding: 12px;
+    border: 2px solid #e6e6e6;
+    border-radius: 8px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+    transition: all 0.2s ease;
+    background-color: #fafafa;
+}
+
+.meta-textarea:focus {
+    outline: none;
+    border-color: #57068c;
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(87, 6, 140, 0.1);
+}
+
+.meta-textarea::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Modal Footer */
+.meta-modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    border-top: 1px solid #f0f0f0;
+    background-color: white;
+}
+
+/* Navigation */
+.meta-modal-footer > div:first-child {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#meta-prev-button,
+#meta-next-button {
+    padding: 8px 16px;
+    background-color: #57068c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+#meta-prev-button:hover,
+#meta-next-button:hover {
+    background-color: #400667;
+    transform: translateY(-1px);
+}
+
+#meta-prev-button:disabled,
+#meta-next-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#meta-status-text {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Export Button */
+.meta-modal-footer button:last-child {
+    padding: 8px 16px;
+    background-color: #f4ebfa;
+    color: #57068c;
+    border: 1px solid #57068c;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.meta-modal-footer button:last-child:hover {
+    background-color: #e0d0eb;
+    transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .meta-modal {
+        width: 95%;
+        height: 95vh;
+        margin: 2.5vh auto;
+    }
+
+    .meta-paragraph-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .meta-modal-header {
+        padding: 15px 20px;
+    }
+
+    .meta-modal-header h3 {
+        font-size: 1.2rem;
+    }
+
+    .meta-modal-content {
+        padding: 20px;
+    }
+
+    .meta-modal-footer {
+        padding: 12px 20px;
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .meta-modal-footer > div:first-child {
+        justify-content: space-between;
+    }
+
+    .meta-textarea {
+        min-height: 120px;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .meta-paragraph-container {
+        border: 2px solid #57068c;
+        box-shadow: none;
+    }
+
+    .meta-textarea {
+        border-width: 2px;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    #meta-prev-button:hover,
+    #meta-next-button:hover,
+    .meta-modal-footer button:last-child:hover {
+        transform: none;
+    }
+
+    .meta-modal-close,
+    .meta-textarea,
+    #meta-prev-button,
+    #meta-next-button {
+        transition: none;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .meta-modal-backdrop {
+        position: static;
+        background: none;
+    }
+
+    .meta-modal {
+        box-shadow: none;
+        height: auto;
+        max-width: none;
+        width: 100%;
+    }
+
+    .meta-modal-header,
+    .meta-modal-footer {
+        display: none;
+    }
+
+    .meta-paragraph-container {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+}

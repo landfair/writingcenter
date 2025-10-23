@@ -1,0 +1,193 @@
+/* Textris Mode Styles */
+
+/* Editor in Textris mode */
+.textris-mode {
+    user-select: none;
+}
+
+/* Remove default margins in Textris mode to avoid interference */
+.textris-mode p,
+.textris-mode div,
+.textris-mode h1,
+.textris-mode h2,
+.textris-mode h3,
+.textris-mode h4,
+.textris-mode h5,
+.textris-mode h6 {
+    margin-bottom: 0;
+}
+
+/* Paragraph dragging styles */
+.textris-mode p[draggable="true"],
+.textris-mode div[draggable="true"],
+.textris-mode h1[draggable="true"],
+.textris-mode h2[draggable="true"],
+.textris-mode h3[draggable="true"],
+.textris-mode h4[draggable="true"],
+.textris-mode h5[draggable="true"],
+.textris-mode h6[draggable="true"] {
+    cursor: grab;
+    border: 1px dashed #ccc;
+    padding: 8px;
+    margin: 4px 0;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    background-color: #fafafa;
+}
+
+.textris-mode p[draggable="true"]:hover,
+.textris-mode div[draggable="true"]:hover,
+.textris-mode h1[draggable="true"]:hover,
+.textris-mode h2[draggable="true"]:hover,
+.textris-mode h3[draggable="true"]:hover,
+.textris-mode h4[draggable="true"]:hover,
+.textris-mode h5[draggable="true"]:hover,
+.textris-mode h6[draggable="true"]:hover {
+    border-color: #57068c;
+    background-color: #f8f4fc;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(87, 6, 140, 0.1);
+}
+
+/* Sentence dragging styles */
+.textris-sentence {
+    cursor: grab;
+    border: 1px dashed transparent;
+    padding: 2px 4px;
+    margin: 1px;
+    border-radius: 3px;
+    display: inline-block;
+    transition: all 0.2s ease;
+    background-color: transparent;
+}
+
+.textris-sentence:hover {
+    border-color: #57068c;
+    background-color: #f8f4fc;
+    box-shadow: 0 1px 4px rgba(87, 6, 140, 0.1);
+}
+
+/* Dragging states */
+.dragging {
+    opacity: 0.5 !important;
+    transform: rotate(2deg);
+    cursor: grabbing !important;
+    border-color: #57068c !important;
+    background-color: #e8d4f0 !important;
+    z-index: 1000;
+}
+
+/* Drop target styles */
+.drag-target {
+    border-color: #57068c !important;
+    background-color: #f0e8f5 !important;
+    border-style: solid !important;
+    box-shadow: 0 0 0 2px rgba(87, 6, 140, 0.2) !important;
+}
+
+.sentence-drag-target {
+    background-color: #f0e8f5 !important;
+    border-color: #57068c !important;
+    border-style: solid !important;
+}
+
+/* Focus states for keyboard navigation */
+.textris-mode [draggable="true"]:focus {
+    outline: 2px solid #57068c;
+    outline-offset: 2px;
+    border-color: #57068c;
+    background-color: #f8f4fc;
+}
+
+/* Selected state for keyboard dragging */
+.textris-mode .dragging:focus {
+    outline: 2px solid #ff6b35;
+    outline-offset: 2px;
+}
+
+/* Textris history buttons */
+.textris-history-buttons {
+    display: flex;
+    gap: 5px;
+    margin-left: 10px;
+}
+
+.textris-history-btn {
+    background: #57068c;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.textris-history-btn:hover {
+    background: #400667;
+}
+
+.textris-history-btn.disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Mode option styles for Textris */
+.mode-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.mode-option-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.mode-option-select {
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    background: white;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .textris-mode p[draggable="true"],
+    .textris-mode div[draggable="true"],
+    .textris-mode h1[draggable="true"],
+    .textris-mode h2[draggable="true"],
+    .textris-mode h3[draggable="true"],
+    .textris-mode h4[draggable="true"],
+    .textris-mode h5[draggable="true"],
+    .textris-mode h6[draggable="true"] {
+        padding: 12px;
+        margin: 6px 0;
+    }
+    
+    .textris-sentence {
+        padding: 4px 6px;
+        margin: 2px;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    .textris-mode p[draggable="true"],
+    .textris-mode div[draggable="true"],
+    .textris-mode h1[draggable="true"],
+    .textris-mode h2[draggable="true"],
+    .textris-mode h3[draggable="true"],
+    .textris-mode h4[draggable="true"],
+    .textris-mode h5[draggable="true"],
+    .textris-mode h6[draggable="true"],
+    .textris-sentence {
+        transition: none;
+    }
+    
+    .dragging {
+        transform: none;
+    }
+}
