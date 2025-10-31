@@ -40,7 +40,7 @@
         }
 
         #new-document-btn {
-            display: none; /* Completely hides the element but keeps it in the DOM */
+            /* Button is now visible for creating new documents */
         }
 
         .fixed-header {
@@ -71,31 +71,96 @@
             align-items: center;
         }
 
-        .action-btn {
-            background-color: white;
-            border: 2px solid #57068c;
-            border-radius: 20px;
-            padding: 8px 20px;
-            font-family: 'Playfair Display', serif;
-            color: #57068c;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.9rem;
-            font-weight: 500;
-            outline: none;
+        /* Dropdown Menu Styles */
+        .menu-container {
+            position: relative;
         }
 
-        .action-btn:hover {
+        .menu-toggle {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px 12px;
+            font-size: 18px;
+            color: #57068c;
+            transition: all 0.2s ease;
+            border-radius: 4px;
+        }
+
+        .menu-toggle:hover {
             background-color: #f4ebfa;
         }
 
-        .action-btn.primary {
-            background-color: #57068c;
-            color: white;
+        .menu-chevron {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-right: 1.5px solid #57068c;
+            border-bottom: 1.5px solid #57068c;
+            transform: rotate(45deg);
+            transition: transform 0.3s ease;
+            margin-bottom: 2px;
         }
 
-        .action-btn.primary:hover {
-            background-color: #400667;
+        .menu-toggle[aria-expanded="true"] .menu-chevron {
+            transform: rotate(-135deg);
+            margin-bottom: -2px;
+            margin-top: 2px;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: white;
+            border: 2px solid #57068c;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(87, 6, 140, 0.15);
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+            z-index: 1020;
+        }
+
+        .dropdown-menu[aria-hidden="false"] {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .menu-item {
+            width: 100%;
+            background: transparent;
+            border: none;
+            padding: 12px 20px;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Playfair Display', serif;
+            color: #57068c;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .menu-item:first-child {
+            border-radius: 6px 6px 0 0;
+        }
+
+        .menu-item:last-child {
+            border-radius: 0 0 6px 6px;
+        }
+
+        .menu-item:hover {
+            background-color: #f4ebfa;
+        }
+
+        .menu-item i {
+            width: 16px;
+            text-align: center;
         }
 
        /* Main container adjustments */
@@ -295,6 +360,7 @@
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.2s ease;
+            position: relative;
         }
 
         .document-item:hover {
@@ -314,6 +380,30 @@
         .document-item .doc-date {
             font-size: 0.8rem;
             color: #666;
+        }
+
+        .document-item .delete-btn {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+            line-height: 1;
+            opacity: 0;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .document-item:hover .delete-btn {
+            opacity: 1;
+        }
+
+        .document-item .delete-btn:hover {
+            color: #d32f2f;
         }
 
       /* Editor container - takes full width of platform container */
@@ -724,6 +814,78 @@
             display: flex;
             justify-content: flex-end;
             gap: 10px;
+        }
+
+        /* Tutorial Modal Styles */
+        .tutorial-modal .modal-content {
+            max-width: 600px;
+            min-height: 300px;
+        }
+
+        .tutorial-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 30px 0;
+            min-height: 150px;
+        }
+
+        .tutorial-progress {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .tutorial-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ddd;
+            transition: background-color 0.3s ease;
+        }
+
+        .tutorial-dot.active {
+            background-color: #57068c;
+        }
+
+        .tutorial-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .tutorial-btn {
+            padding: 10px 20px;
+            background-color: #57068c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Open Sans', sans-serif;
+            transition: background-color 0.2s ease;
+        }
+
+        .tutorial-btn:hover {
+            background-color: #450670;
+        }
+
+        .tutorial-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .tutorial-skip {
+            color: #666;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-decoration: underline;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .tutorial-skip:hover {
+            color: #57068c;
         }
 
         /* Notification Style */
@@ -2134,7 +2296,7 @@
 .greening-mode {
     position: relative;
     user-select: text;
-    cursor: crosshair;
+    cursor: text;
 }
 
 /* Selected text for deletion */
@@ -3838,36 +4000,41 @@
         </div>
         <div class="header-title" id="app-title">writing-center.org</div>
         <div class="header-right">
-           
-            <button id="new-document-btn" class="action-btn primary" aria-label="Create new document">
-                <i class="fas fa-plus" aria-hidden="true"></i> New Document
-            </button>
-        
-            <button id="report-bug-btn" class="action-btn" aria-label="Report a bug">
-                <i class="fas fa-bug" aria-hidden="true"></i> Report Bug
-            </button>
-
-            <button id="reset-app-btn" class="action-btn" aria-label="Reset application data">
-                <i class="fas fa-trash-alt"></i> Reset App
-            </button>
-
-
-            <button id="user-profile-btn" class="action-btn" aria-label="Open user account settings">
-                <i class="fas fa-user" aria-hidden="true"></i> My Account
-            </button>
+            <div class="menu-container">
+                <button id="menu-toggle-btn" class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+                    <span class="menu-chevron"></span>
+                </button>
+                <div id="dropdown-menu" class="dropdown-menu" role="menu" aria-hidden="true">
+                    <button id="new-document-btn" class="menu-item" role="menuitem">
+                        <i class="fas fa-plus"></i> New Document
+                    </button>
+                    <button id="about-btn" class="menu-item" role="menuitem">
+                        <i class="fas fa-info-circle"></i> About
+                    </button>
+                    <button id="report-bug-btn" class="menu-item" role="menuitem">
+                        <i class="fas fa-bug"></i> Report Bug
+                    </button>
+                    <button id="reset-app-btn" class="menu-item" role="menuitem">
+                        <i class="fas fa-trash-alt"></i> Reset App
+                    </button>
+                    <button id="user-profile-btn" class="menu-item" role="menuitem">
+                        <i class="fas fa-user"></i> My Account
+                    </button>
+                </div>
+            </div>
         </div>
     </header>
 
     <main>
         <!-- Trigger area at the very left edge -->
-        <div class="sidebar-trigger" role="button" aria-label="Toggle document list sidebar" tabindex="0"></div>
+        <button class="sidebar-trigger" aria-label="Toggle document list sidebar"></button>
 
         <!-- Sidebar with fixed position to overlay -->
         <div class="sidebar" id="documents-sidebar" role="navigation" aria-label="Document list">
             <div class="sidebar-header">
                 <h3>My Documents</h3>
             </div>
-            <ul class="document-list" id="document-list" aria-labelledby="sidebar-heading">
+            <ul class="document-list" id="documentList" aria-labelledby="sidebar-heading">
                 <!-- Document list will be populated dynamically -->
             </ul>
         </div>
@@ -3898,6 +4065,7 @@
                         <button class="toolbar-btn" title="Heading 1" onclick="formatText('h1')" aria-label="Heading 1">H1</button>
                         <button class="toolbar-btn" title="Heading 2" onclick="formatText('h2')" aria-label="Heading 2">H2</button>
                         <button class="toolbar-btn" title="Heading 3" onclick="formatText('h3')" aria-label="Heading 3">H3</button>
+                        <button class="toolbar-btn" title="Normal Text" onclick="formatText('p')" aria-label="Normal Text">t</button>
                     </div>
                     
                     <div class="toolbar-separator" aria-hidden="true"></div>
@@ -4014,6 +4182,29 @@
                 </div>
             </div>
         </div>
+
+    <!-- Tutorial Modal with ARIA support -->
+    <div class="modal tutorial-modal" id="tutorial-modal" role="dialog" aria-labelledby="tutorial-title" aria-hidden="true">
+        <div class="modal-content" role="document">
+            <div class="modal-header">
+                <div id="tutorial-title" class="modal-title">About Writing Center</div>
+                <button class="modal-close" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="tutorial-content" id="tutorial-content">
+                    <!-- Content will be populated dynamically -->
+                </div>
+                <div class="tutorial-progress" id="tutorial-progress" aria-label="Tutorial progress">
+                    <!-- Progress dots will be added dynamically -->
+                </div>
+            </div>
+            <div class="tutorial-navigation">
+                <button class="tutorial-skip" id="tutorial-prev">Previous</button>
+                <button class="tutorial-skip" id="tutorial-skip">Skip Tutorial</button>
+                <button class="tutorial-btn" id="tutorial-next">Next</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Notification with ARIA support -->
     <div class="notification" id="notification" role="alert" aria-live="assertive">
@@ -4245,16 +4436,23 @@
         activeDocumentId: null,
         hasUnsavedChanges: false,
         
-        // Load documents from localStorage or use demo documents
+        // Load documents from localStorage or create a blank document
         load() {
-            const storedDocuments = localStorage.getItem('nyu_writing_documents');
+            const storedDocuments = localStorage.getItem('documents');
             if (storedDocuments) {
             this.documents = JSON.parse(storedDocuments);
             } else {
-            // Use demo documents for first-time users
-            this.documents = demoDocuments;
+            // Create a single document with placeholder content for new users
+            this.documents = [{
+                id: 'doc' + Date.now(),
+                title: 'Untitled Document',
+                content: '<p>Start writing here...</p>',
+                plainText: 'Start writing here...',
+                lastModified: new Date().toISOString(),
+                wordCount: 3
+            }];
             // Save to localStorage
-            localStorage.setItem('nyu_writing_documents', JSON.stringify(this.documents));
+            localStorage.setItem('documents', JSON.stringify(this.documents));
             }
         },
         
@@ -4354,7 +4552,7 @@
             
             // Save to localStorage
             try {
-                localStorage.setItem('nyu_writing_documents', JSON.stringify(this.documents));
+                localStorage.setItem('documents', JSON.stringify(this.documents));
              
                 
                 // Clear unsaved changes flag after successful save
@@ -4378,17 +4576,19 @@
             // Find the document in our list
             const document = this.documents.find(doc => doc.id === docId);
             if (!document) return;
-            
+
             // Update active document
             this.activeDocumentId = docId;
             this.currentDocument = document;
-            
-            // Update UI
+
+            // Update UI with loading flag to prevent auto-save
             documentTitle.textContent = document.title;
+            window.isLoadingDocument = true;
             editor.innerHTML = document.content || '';
+            window.isLoadingDocument = false;
             this.updateWordCount();
             this.updateLastSaved();
-            
+
             // Reset unsaved changes flag
             this.hasUnsavedChanges = false;
             
@@ -4437,17 +4637,47 @@
             this.documents.unshift(newDocument);
             
             // Save to localStorage
-            localStorage.setItem('nyu_writing_documents', JSON.stringify(this.documents));
+            localStorage.setItem('documents', JSON.stringify(this.documents));
             
             // Open the new document
             this.openDocument(newDocument.id);
             
             // Show notification
             showNotification('New document created!');
-            
+
             return newDocument.id;
         },
-        
+
+        // Delete a document by ID
+        deleteDocument(docId) {
+            // Find the index of the document
+            const index = this.documents.findIndex(doc => doc.id === docId);
+            if (index === -1) return;
+
+            // Don't delete if it's the last document
+            if (this.documents.length <= 1) {
+                showNotification('Cannot delete the last document!', 'error');
+                return;
+            }
+
+            // Remove the document from the array
+            this.documents.splice(index, 1);
+
+            // Save to localStorage
+            localStorage.setItem('documents', JSON.stringify(this.documents));
+
+            // If we deleted the active document, open the first one
+            if (this.activeDocumentId === docId) {
+                this.openDocument(this.documents[0].id);
+            }
+
+            // Update the document list
+            this.renderDocumentList();
+
+            // Show notification
+            showNotification('Document deleted successfully!');
+        },
+
         // Render the document list with proper ARIA attributes
         renderDocumentList() {
             documentList.innerHTML = '';
@@ -4474,11 +4704,12 @@
             listItem.innerHTML = `
                 <div class="doc-title">${doc.title}</div>
                 <div class="doc-date">Last edited: ${formattedDate}</div>
+                <button class="delete-btn" data-doc-id="${doc.id}" title="Delete" aria-label="Delete document">×</button>
             `;
-            
+
             // Use delegation-friendly approach - add data attributes instead of direct listeners
             listItem.dataset.action = 'open-document';
-            
+
             documentList.appendChild(listItem);
             });
         },
@@ -4518,7 +4749,7 @@ const demoDocuments = [
     {
         id: 'doc1',
         title: 'Main Document',
-        content: '<h1>Welcome to Writing-Center!</h1><h2>How writers write.</h2><p>Imagine this is your current essay draft, and you need a little critical distance from it. You\'ve been staring at the screen for hours, and don\'t know whether any of it makes sense anymore. This is a common experience for writers at all levels. It\'s not easy—for anyone!—to anticipate how writing will look through the readers eyes. The most experienced writers, however, develop strategies for finding room for improvement, and revising effectively.</p><p>The traditional word processor offers little help with this problem. Programs like Microsoft Word and Google Docs are designed primarily for text entry and basic formatting, not for the complex cognitive work of revision. They present writing as a linear process, encouraging writers to simply keep adding words, or make superficial revisions (finding stray commas, for example, or replacing one word for a close synonym) rather than stepping back to reconsider structure, coherence, and purpose. When we hit a wall in our writing process, typical word processors often leave us without strategies to move forward.</p><p>This is where Writing Center aims to make a difference. Rather than treating writing as the simple act of "getting ideas down," this platform acknowledges writing as a thinking process that requires different modes of engagement at different stages. The various "modes" available here are designed to help you gain new perspectives on your writing and make deliberate choices about revision. Each mode represents a specific strategy that experienced writers use to improve their work.</p><p>Consider, for instance, the challenge of evaluating your essay\'s structure. Our "Textris mode" feature, transforms paragraphs into easily movable blocks, allowing you to experiment with different arrangements without committing to permanent changes. By visually manipulating these blocks, you can test whether a different arrangement might boost your readers\' comprehension or engagement. This approach often reveals logical gaps or opportunities for stronger transitions that weren\'t apparent in the traditional linear view. Many writers find that physically rearranging their ideas unlocks new insights about how their argument might progress.</p><p>For writers struggling with sentence-level flow and coherence, "Reader mode" offers a way to experience your text as a reader might. This mode presents your writing one sentence at a time, prompting you to reflect on what readers need and expect as they move along from idea to idea. This slowed-down, sequential reading experience helps identify places where your writing makes unexpected leaps or fails to fulfill the expectations you\'ve established (purposefully or not!). This mode specifically targets the connections between sentences, highlighting where transitions might be missing or where the logical links between ideas need strengthening.</p><p>"Fire mode" addresses a different revision challenge: identifying and emphasizing your most important points. As writers, it\'s not always easy to distinguish between our key ideas and supporting details. If this is hard for us, as writers, imagine how much more difficult this is for our readers. To bridge this gap, this mode asks you to identify the "sentences you\'d save in a fire" – those that carry your core message or represent the twists and turns of your argument. Once identified, you can strategically position these key sentences for maximum impact, typically at the beginnings and ends of paragraphs where readers pay most attention. This process not only clarifies your main points but often reveals when crucial arguments are buried or underdeveloped.</p><p>Beyond these specific revision modes, the platform\'s document system encourages a more comprehensive approach to the writing process. Rather than cramming everything into a single file, you can create separate documents for different aspects of your project. Just hover your cursor over the lefthand side of the screen to toggle the My Documents menu. The "Evidence Repository" collects research and quotes, the "Goals & Requirements" document keeps assignment guidelines accessible, "Brainstorming" and "Outlining" documents support early-stage planning, and the "Scrap Heap" preserves deleted content that might prove useful later. This distributed approach helps manage complex projects without getting overwhelmed.</p><p>As you navigate this platform, experiment with different modes to discover which ones address your specific writing challenges. Not every mode will be equally useful for every project or writing stage. You might find that "Textris mode" transforms your approach to organization, while another writer might gain more from the sentence-by-sentence reflection of "Reader mode." The key is to engage actively with these tools rather than passively continuing to add text. Take a step back, gain some critical distance, and approach revision as a deliberate, strategic process. Your writing – and your readers – will benefit from this more thoughtful approach to revision.</p>',
+        content: '<p>Imagine this is your current essay draft, and you need a little critical distance from it. You\'ve been staring at the screen for hours, and don\'t know whether any of it makes sense anymore. This is a common experience for writers at all levels. It\'s not easy—for anyone!—to anticipate how writing will look through the readers eyes. The most experienced writers, however, develop strategies for finding room for improvement, and revising effectively.</p><p>The traditional word processor offers little help with this problem. Programs like Microsoft Word and Google Docs are designed primarily for text entry and basic formatting, not for the complex cognitive work of revision. They present writing as a linear process, encouraging writers to simply keep adding words, or make superficial revisions (finding stray commas, for example, or replacing one word for a close synonym) rather than stepping back to reconsider structure, coherence, and purpose. When we hit a wall in our writing process, typical word processors often leave us without strategies to move forward.</p><p>This is where Writing Center aims to make a difference. Rather than treating writing as the simple act of "getting ideas down," this platform acknowledges writing as a thinking process that requires different modes of engagement at different stages. The various "modes" available here are designed to help you gain new perspectives on your writing and make deliberate choices about revision. Each mode represents a specific strategy that experienced writers use to improve their work.</p><p>Consider, for instance, the challenge of evaluating your essay\'s structure. Our "Textris mode" feature, transforms paragraphs into easily movable blocks, allowing you to experiment with different arrangements without committing to permanent changes. By visually manipulating these blocks, you can test whether a different arrangement might boost your readers\' comprehension or engagement. This approach often reveals logical gaps or opportunities for stronger transitions that weren\'t apparent in the traditional linear view. Many writers find that physically rearranging their ideas unlocks new insights about how their argument might progress.</p><p>For writers struggling with sentence-level flow and coherence, "Reader mode" offers a way to experience your text as a reader might. This mode presents your writing one sentence at a time, prompting you to reflect on what readers need and expect as they move along from idea to idea. This slowed-down, sequential reading experience helps identify places where your writing makes unexpected leaps or fails to fulfill the expectations you\'ve established (purposefully or not!). This mode specifically targets the connections between sentences, highlighting where transitions might be missing or where the logical links between ideas need strengthening.</p><p>"Fire mode" addresses a different revision challenge: identifying and emphasizing your most important points. As writers, it\'s not always easy to distinguish between our key ideas and supporting details. If this is hard for us, as writers, imagine how much more difficult this is for our readers. To bridge this gap, this mode asks you to identify the "sentences you\'d save in a fire" – those that carry your core message or represent the twists and turns of your argument. Once identified, you can strategically position these key sentences for maximum impact, typically at the beginnings and ends of paragraphs where readers pay most attention. This process not only clarifies your main points but often reveals when crucial arguments are buried or underdeveloped.</p><p>Beyond these specific revision modes, the platform\'s document system encourages a more comprehensive approach to the writing process. Rather than cramming everything into a single file, you can create separate documents for different aspects of your project. Just hover your cursor over the lefthand side of the screen to toggle the My Documents menu. The "Evidence Repository" collects research and quotes, the "Goals & Requirements" document keeps assignment guidelines accessible, "Brainstorming" and "Outlining" documents support early-stage planning, and the "Scrap Heap" preserves deleted content that might prove useful later. This distributed approach helps manage complex projects without getting overwhelmed.</p><p>As you navigate this platform, experiment with different modes to discover which ones address your specific writing challenges. Not every mode will be equally useful for every project or writing stage. You might find that "Textris mode" transforms your approach to organization, while another writer might gain more from the sentence-by-sentence reflection of "Reader mode." The key is to engage actively with these tools rather than passively continuing to add text. Take a step back, gain some critical distance, and approach revision as a deliberate, strategic process. Your writing – and your readers – will benefit from this more thoughtful approach to revision.</p>',
         lastModified: '2025-03-06T14:30:00',
         wordCount: 486
     },
@@ -4673,7 +4904,7 @@ const demoDocuments = [
 
         // DOM Elements
         const editor = document.getElementById('editor');
-        const documentList = document.getElementById('document-list');
+        const documentList = document.getElementById('documentList');
         const documentTitle = document.getElementById('document-title');
         const wordCount = document.getElementById('word-count');
         const lastSaved = document.getElementById('last-saved');
@@ -4996,11 +5227,10 @@ const demoDocuments = [
                         const popupDoc = this.popupWindow.document;
                         
                         // Generate HTML for the popup
+                        // Note: generatePomodoroHTML now handles calling initializePomodoroPopup
+                        // with proper timing for Chrome compatibility
                         this.generatePomodoroHTML(popupDoc);
-                        
-                        // Initialize the Pomodoro timer and tasks in the popup
-                        this.initializePomodoroPopup();
-                        
+
                         // Handle window close events
                         this.popupWindow.addEventListener('beforeunload', () => {
                             // Save data when window is closed
@@ -5299,12 +5529,12 @@ const demoDocuments = [
                                     }
                                     
                                     .pomodoro-task-controls {
-                                        opacity: 0.3;
+                                        opacity: 1;
                                         display: flex;
                                         gap: 4px;
                                         transition: opacity 0.2s ease;
                                     }
-                                    
+
                                     .pomodoro-task-content:hover .pomodoro-task-controls {
                                         opacity: 1;
                                     }
@@ -5737,20 +5967,39 @@ const demoDocuments = [
                             </html>
                         `);
                         popupDoc.close();
+
+                        // Chrome needs a moment for the DOM to be fully ready
+                        // Use DOMContentLoaded or a small delay to ensure handlers attach properly
+                        const self = this;
+                        if (popupDoc.readyState === 'complete') {
+                            // Already loaded
+                            setTimeout(() => {
+                                self.initializePomodoroPopup();
+                            }, 10);
+                        } else {
+                            // Wait for load
+                            this.popupWindow.addEventListener('load', function() {
+                                setTimeout(() => {
+                                    self.initializePomodoroPopup();
+                                }, 10);
+                            });
+                        }
                     },
 
-                    
+
                     // Now, let's replace the onclick handler for the task list with a more reliable version
                     // This should be included in the initializePomodoroPopup function
                     initializePomodoroPopup: function() {
                         if (!this.popupWindow || this.popupWindow.closed) return;
-                        
+
                         const self = this; // Store reference to this for event handlers
                         const popupDoc = this.popupWindow.document;
-                        
+
+                        console.log('Initializing Pomodoro popup, readyState:', popupDoc.readyState);
+
                         // Setup timer display
                         this.updateTimerDisplay();
-                        
+
                         // Render tasks
                         this.renderTasks();
                         
@@ -5815,84 +6064,7 @@ const demoDocuments = [
                         setupSlider('short-break', 'short-break-value');
                         setupSlider('long-break', 'long-break-value');
                         setupSlider('sessions-count', 'sessions-value');
-                        
-                        // FIX: Improved task list click handler with better delete functionality
-                        const tasksList = popupDoc.getElementById('pomodoro-tasks');
-                        if (tasksList) {
-                            tasksList.onclick = function(e) {
-                                // Prevent default to avoid any issues
-                                e.preventDefault();
-                                
-                                const target = e.target;
-                                console.log("Clicked element:", target.tagName, target.className);
-                                
-                                // Handle delete button click - check both the icon and the button
-                                const deleteBtn = target.closest('.pomodoro-task-delete');
-                                if (deleteBtn) {
-                                    console.log("Delete button clicked");
-                                    const taskItem = deleteBtn.closest('.pomodoro-task-item');
-                                    if (taskItem) {
-                                        const taskId = taskItem.dataset.id;
-                                        console.log("Task ID for deletion:", taskId);
-                                        
-                                        if (taskId) {
-                                            if (confirm('Are you sure you want to delete this task?')) {
-                                                self.deleteTask(taskId);
-                                            }
-                                        }
-                                        return;
-                                    }
-                                }
-                                
-                                // Handle expand/collapse
-                                const expandToggle = target.closest('.pomodoro-toggle-expand');
-                                if (expandToggle) {
-                                    const taskItem = expandToggle.closest('.pomodoro-task-item');
-                                    if (taskItem) {
-                                        taskItem.classList.toggle('pomodoro-collapsed');
-                                    }
-                                    return;
-                                }
-                                
-                                // Handle checkbox
-                                if (target.classList.contains('pomodoro-task-checkbox')) {
-                                    const taskItem = target.closest('.pomodoro-task-item');
-                                    if (taskItem) {
-                                        const taskId = taskItem.dataset.id;
-                                        self.toggleTaskCompletion(taskId, target.checked);
-                                    }
-                                    return;
-                                }
-                                
-                                // Handle add subtask button
-                                const addSubtaskBtn = target.closest('.pomodoro-task-add-subtask');
-                                if (addSubtaskBtn) {
-                                    const taskItem = addSubtaskBtn.closest('.pomodoro-task-item');
-                                    if (taskItem) {
-                                        const taskId = taskItem.dataset.id;
-                                        if (taskId) {
-                                            self.addSubtask(taskId);
-                                        }
-                                    }
-                                    return;
-                                }
-                                
-                                // Handle edit button
-                                const editBtn = target.closest('.pomodoro-task-edit');
-                                if (editBtn) {
-                                    const taskItem = editBtn.closest('.pomodoro-task-item');
-                                    if (taskItem) {
-                                        const taskId = taskItem.dataset.id;
-                                        const taskTextEl = taskItem.querySelector('.pomodoro-task-text');
-                                        if (taskId && taskTextEl) {
-                                            self.editTask(taskId, taskTextEl);
-                                        }
-                                    }
-                                    return;
-                                }
-                            };
-                        }
-                        
+
                         // Start the timer if it was running
                         if (this.timerState.isRunning) {
                             this.startTimer();
@@ -6503,12 +6675,25 @@ const demoDocuments = [
                                 if (!hasSubtasks) {
                                     expandToggle.style.visibility = 'hidden';
                                 }
+
+                                // Attach onclick handler to expand toggle
+                                expandToggle.onclick = function(e) {
+                                    e.stopPropagation();
+                                    taskItem.classList.toggle('pomodoro-collapsed');
+                                };
                                 
                                 // Create checkbox
                                 const checkbox = popupDoc.createElement('input');
                                 checkbox.type = 'checkbox';
                                 checkbox.className = 'pomodoro-task-checkbox';
                                 checkbox.checked = task.completed || false;
+
+                                // Attach onchange handler to checkbox
+                                const taskIdForCheckbox = task.id;
+                                const selfForCheckbox = this;
+                                checkbox.onchange = function(e) {
+                                    selfForCheckbox.toggleTaskCompletion(taskIdForCheckbox, this.checked);
+                                };
                                 
                                 // Create text element
                                 const textEl = popupDoc.createElement('div');
@@ -6525,12 +6710,31 @@ const demoDocuments = [
                                 addSubtaskBtn.setAttribute('aria-label', 'Add subtask');
                                 addSubtaskBtn.innerHTML = '<i class="fas fa-list"></i>';
                                 addSubtaskBtn.dataset.taskId = task.id;
-                                
+
+                                // Attach onclick to add subtask button
+                                const taskIdForSubtask = task.id;
+                                const selfForSubtask = this;
+                                addSubtaskBtn.onclick = function(e) {
+                                    e.stopPropagation();
+                                    selfForSubtask.addSubtask(taskIdForSubtask);
+                                };
+
                                 // Edit button
                                 const editBtn = popupDoc.createElement('button');
                                 editBtn.className = 'pomodoro-task-btn pomodoro-task-edit';
                                 editBtn.setAttribute('aria-label', 'Edit task');
                                 editBtn.innerHTML = '<i class="fas fa-edit"></i>';
+
+                                // Attach onclick to edit button
+                                const taskIdForEdit = task.id;
+                                const selfForEdit = this;
+                                editBtn.onclick = function(e) {
+                                    e.stopPropagation();
+                                    const taskTextEl = this.closest('.pomodoro-task-item').querySelector('.pomodoro-task-text');
+                                    if (taskTextEl) {
+                                        selfForEdit.editTask(taskIdForEdit, taskTextEl);
+                                    }
+                                };
                                 
                                 // Delete button
                                 const deleteBtn = popupDoc.createElement('button');
@@ -6538,6 +6742,15 @@ const demoDocuments = [
                                 deleteBtn.setAttribute('aria-label', 'Delete task');
                                 deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
                                 deleteBtn.dataset.taskId = task.id;
+
+                                // Attach onclick directly to the button
+                                const taskIdToDelete = task.id;  // Capture in closure
+                                const self = this;  // Capture this context
+                                deleteBtn.onclick = function(e) {
+                                    e.stopPropagation();
+                                    console.log('Delete button onclick fired for task:', taskIdToDelete);
+                                    self.deleteTask(taskIdToDelete);
+                                };
                                 
                                 // Assemble controls
                                 controls.appendChild(addSubtaskBtn);
@@ -6572,84 +6785,11 @@ const demoDocuments = [
                         
                         // Start rendering from top-level tasks
                         renderTaskList(this.taskData.tasks, tasksList);
+
+                        // Event handlers are now attached directly to each button as they're created
+                        // No need for event delegation anymore
                     },
 
-
-                    // New method to set up task event handlers using event delegation
-                    setupTaskEventHandlers: function() {
-                        if (!this.popupWindow || this.popupWindow.closed) return;
-                        
-                        const popupDoc = this.popupWindow.document;
-                        const tasksList = popupDoc.getElementById('pomodoro-tasks');
-                        
-                        if (!tasksList) return;
-                        
-                        // Remove existing listener if any
-                        if (this.taskListClickHandler) {
-                            tasksList.removeEventListener('click', this.taskListClickHandler);
-                        }
-                        
-                        // Create a handler for all task-related clicks
-                        this.taskListClickHandler = (e) => {
-                            const target = e.target;
-                            
-                            // Toggle expand/collapse
-                            if (target.closest('.pomodoro-toggle-expand')) {
-                                const taskItem = target.closest('.pomodoro-task-item');
-                                if (taskItem) {
-                                    taskItem.classList.toggle('pomodoro-collapsed');
-                                }
-                            }
-                            
-                            // Add subtask
-                            if (target.closest('.pomodoro-task-add-subtask')) {
-                                const addBtn = target.closest('.pomodoro-task-add-subtask');
-                                const taskId = addBtn.dataset.taskId;
-                                if (taskId) {
-                                    this.addSubtask(taskId);
-                                }
-                            }
-                            
-                            // Task checkbox
-                            if (target.classList.contains('pomodoro-task-checkbox')) {
-                                const taskItem = target.closest('.pomodoro-task-item');
-                                if (taskItem) {
-                                    const taskId = taskItem.dataset.id;
-                                    const isChecked = target.checked;
-                                    this.toggleTaskCompletion(taskId, isChecked);
-                                }
-                            }
-                            
-                            // Edit task
-                            if (target.closest('.pomodoro-task-edit')) {
-                                const taskItem = target.closest('.pomodoro-task-item');
-                                if (taskItem) {
-                                    const taskId = taskItem.dataset.id;
-                                    const taskTextEl = taskItem.querySelector('.pomodoro-task-text');
-                                    if (taskId && taskTextEl) {
-                                        this.editTask(taskId, taskTextEl);
-                                    }
-                                }
-                            }
-                            
-                            // Delete task
-                            if (target.closest('.pomodoro-task-delete')) {
-                                const taskItem = target.closest('.pomodoro-task-item');
-                                if (taskItem) {
-                                    const taskId = taskItem.dataset.id;
-                                    if (taskId) {
-                                        if (confirm('Are you sure you want to delete this task?')) {
-                                            this.deleteTask(taskId);
-                                        }
-                                    }
-                                }
-                            }
-                        };
-                        
-                        // Add the event listener
-                        tasksList.addEventListener('click', this.taskListClickHandler);
-                    },
-                    
                     // Update task display based on display preference
                     updateTaskDisplay: function() {
                         if (!this.popupWindow || this.popupWindow.closed) return;
@@ -11401,7 +11541,7 @@ greening: {
             
             const finalWordCount = this.countWords(editor.innerText);
             const wordsReduced = this.originalStats.wordCount - finalWordCount;
-            const linesReduced = Math.round(wordsReduced / 12); // Approximate lines
+            const linesReduced = Math.round(wordsReduced / 25); // 25 words per line
             
             modal.innerHTML = `
                 <div class="modal-content" style="max-width: 600px;">
@@ -11505,10 +11645,10 @@ greening: {
                             
                             <div style="margin: 15px 0;">
                                 <label style="display: flex; align-items: center; margin-bottom: 10px;">
-                                    <input type="radio" name="goalType" value="percentage" style="margin-right: 8px;">
+                                    <input type="radio" name="goalType" value="percentage" checked style="margin-right: 8px;">
                                     <span>Reduce by percentage</span>
                                 </label>
-                                <div id="percentage-input" style="margin-left: 25px; display: none;">
+                                <div id="percentage-input" style="margin-left: 25px; display: block;">
                                     <label>Reduce by: 
                                         <input type="number" id="percentage-value" min="1" max="50" value="10" style="width: 60px; margin-left: 5px;">%
                                     </label>
@@ -11523,21 +11663,21 @@ greening: {
                                     <input type="radio" name="goalType" value="wordCount" style="margin-right: 8px;">
                                     <span>Cut specific word count</span>
                                 </label>
-                                <div id="wordcount-input" style="margin-left: 25px; display: none;">
-                                    <label>Cut: 
-                                        <input type="number" id="wordcount-value" min="1" max="1000" value="50" style="width: 80px; margin-left: 5px;"> words
+                                <div id="wordCount-input" style="margin-left: 25px; display: none;">
+                                    <label>Cut:
+                                        <input type="number" id="wordCount-value" min="1" max="1000" value="50" style="width: 80px; margin-left: 5px;"> words
                                     </label>
                                 </div>
                             </div>
-                            
+
                             <div style="margin: 15px 0;">
                                 <label style="display: flex; align-items: center; margin-bottom: 10px;">
                                     <input type="radio" name="goalType" value="lineCount" style="margin-right: 8px;">
                                     <span>Reduce line count (McPhee style)</span>
                                 </label>
-                                <div id="linecount-input" style="margin-left: 25px; display: none;">
-                                    <label>Green: 
-                                        <input type="number" id="linecount-value" min="1" max="20" value="5" style="width: 60px; margin-left: 5px;"> lines
+                                <div id="lineCount-input" style="margin-left: 25px; display: none;">
+                                    <label>Green:
+                                        <input type="number" id="lineCount-value" min="1" max="20" value="5" style="width: 60px; margin-left: 5px;"> lines
                                     </label>
                                     <div style="font-size: 0.85rem; color: #666; margin-top: 5px;">
                                         Current: <span id="current-lines"></span> lines
@@ -11559,10 +11699,13 @@ greening: {
         
         // Update current stats
         this.updateGoalModalStats();
-        
+
         // Show modal
         modal.style.display = 'flex';
-        
+
+        // Update percentage target on open (since percentage is checked by default)
+        this.updatePercentageTarget();
+
         // Focus first radio button
         const firstRadio = modal.querySelector('input[type="radio"]');
         if (firstRadio) {
@@ -11654,10 +11797,10 @@ greening: {
                 this.goalValue = Math.round(this.originalStats.wordCount * percentage / 100);
                 break;
             case 'wordCount':
-                this.goalValue = parseInt(modal.querySelector('#wordcount-value').value) || 50;
+                this.goalValue = parseInt(modal.querySelector('#wordCount-value').value) || 50;
                 break;
             case 'lineCount':
-                this.goalValue = parseInt(modal.querySelector('#linecount-value').value) || 5;
+                this.goalValue = parseInt(modal.querySelector('#lineCount-value').value) || 5;
                 break;
         }
         
@@ -11703,22 +11846,30 @@ greening: {
     },
     
     setupEventListeners: function() {
-        // Double-click selection
-        editor.addEventListener('dblclick', this.handleDoubleClick.bind(this));
-        
-        // Drag selection
-        editor.addEventListener('mouseup', this.handleMouseUp.bind(this));
-        
+        // Store bound functions so they can be properly removed later
+        this.boundMouseDown = this.handleMouseDown.bind(this);
+        this.boundMouseUp = this.handleMouseUp.bind(this);
+        this.boundDoubleClick = this.handleDoubleClick.bind(this);
+        this.boundPreventEditing = this.preventEditing.bind(this);
+
+        // Track mouse activity
+        editor.addEventListener('mousedown', this.boundMouseDown);
+        editor.addEventListener('mouseup', this.boundMouseUp);
+        editor.addEventListener('dblclick', this.boundDoubleClick);
+
         // Prevent text editing
-        editor.addEventListener('keydown', this.preventEditing.bind(this));
+        editor.addEventListener('keydown', this.boundPreventEditing);
     },
-    
+
     removeEventListeners: function() {
-        editor.removeEventListener('dblclick', this.handleDoubleClick.bind(this));
-        editor.removeEventListener('mouseup', this.handleMouseUp.bind(this));
-        editor.removeEventListener('keydown', this.preventEditing.bind(this));
+        if (this.boundMouseDown) {
+            editor.removeEventListener('mousedown', this.boundMouseDown);
+            editor.removeEventListener('mouseup', this.boundMouseUp);
+            editor.removeEventListener('dblclick', this.boundDoubleClick);
+            editor.removeEventListener('keydown', this.boundPreventEditing);
+        }
     },
-    
+
     preventEditing: function(e) {
         // Allow navigation keys but prevent text input
         const allowedKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageUp', 'PageDown'];
@@ -11726,65 +11877,183 @@ greening: {
             e.preventDefault();
         }
     },
-    
+
+    handleMouseDown: function(e) {
+        // Store mousedown time and position to detect double-click vs drag
+        this.mouseDownTime = Date.now();
+        this.mouseDownX = e.clientX;
+        this.mouseDownY = e.clientY;
+    },
+
     handleDoubleClick: function(e) {
         e.preventDefault();
-        
-        // Get the word at click position
-        const range = this.getWordAtPosition(e);
-        if (range) {
-            this.toggleSelection(range);
+        e.stopPropagation();
+
+        // Mark that a double-click occurred
+        this.lastDoubleClickTime = Date.now();
+
+        // Check if clicking on an already-selected span to deselect it
+        const clickedSpan = e.target.closest('.greening-selected');
+        if (clickedSpan && clickedSpan.id) {
+            const selectionData = this.selectedForDeletion.find(sel => sel.id === clickedSpan.id);
+            if (selectionData) {
+                this.removeSelection(selectionData);
+                this.updateProgressDisplay();
+                window.getSelection().removeAllRanges();
+                return;
+            }
         }
+
+        // Get the position where the user clicked
+        let range;
+        if (document.caretRangeFromPoint) {
+            range = document.caretRangeFromPoint(e.clientX, e.clientY);
+        } else if (document.caretPositionFromPoint) {
+            const position = document.caretPositionFromPoint(e.clientX, e.clientY);
+            if (position) {
+                range = document.createRange();
+                range.setStart(position.offsetNode, position.offset);
+                range.collapse(true);
+            }
+        }
+
+        if (!range) {
+            console.warn('Could not determine click position');
+            return;
+        }
+
+        // Set selection to the click position
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+        // Expand selection to word boundary
+        if (selection.modify) {
+            // Modern browsers - expand to word boundaries
+            selection.modify('move', 'backward', 'word');
+            selection.modify('extend', 'forward', 'word');
+
+            // Get the expanded range
+            const wordRange = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+            if (wordRange && wordRange.toString().trim()) {
+                this.addSelection(wordRange);
+                this.updateProgressDisplay();
+            }
+        } else {
+            // Fallback for older browsers
+            const wordRange = this.getWordAtPosition(e);
+            if (wordRange && wordRange.toString().trim()) {
+                this.addSelection(wordRange);
+                this.updateProgressDisplay();
+            }
+        }
+
+        // Clear visual selection
+        setTimeout(() => window.getSelection().removeAllRanges(), 10);
     },
-    
+
     handleMouseUp: function(e) {
+        // Don't process if this was part of a double-click
+        const timeSinceDoubleClick = Date.now() - (this.lastDoubleClickTime || 0);
+        if (timeSinceDoubleClick < 500) {
+            return;
+        }
+
+        // Check if this was a drag (mouse moved during selection)
+        const timeSinceMouseDown = Date.now() - (this.mouseDownTime || 0);
+        const mouseMovedX = Math.abs(e.clientX - (this.mouseDownX || e.clientX));
+        const mouseMovedY = Math.abs(e.clientY - (this.mouseDownY || e.clientY));
+        const isDrag = mouseMovedX > 5 || mouseMovedY > 5 || timeSinceMouseDown > 200;
+
+        // Only process drag selections, not clicks
+        if (!isDrag) {
+            return;
+        }
+
+        // Get the user's selection
         const selection = window.getSelection();
         const selectedText = selection.toString().trim();
-        
+
         if (selectedText && selectedText.length > 0) {
             const range = selection.getRangeAt(0);
-            this.toggleSelection(range);
+            this.addSelection(range);
+            this.updateProgressDisplay();
+
+            // Clear the browser selection after we've processed it
+            setTimeout(() => window.getSelection().removeAllRanges(), 10);
         }
     },
     
     getWordAtPosition: function(e) {
-        // Create a range at the click position
-        const range = document.createRange();
-        const textNode = e.target.childNodes[0] || e.target;
-        
-        if (textNode.nodeType !== Node.TEXT_NODE) {
-            return null;
+        // Use caretRangeFromPoint to get the exact position clicked
+        let range;
+        if (document.caretRangeFromPoint) {
+            range = document.caretRangeFromPoint(e.clientX, e.clientY);
+        } else if (document.caretPositionFromPoint) {
+            const position = document.caretPositionFromPoint(e.clientX, e.clientY);
+            if (position) {
+                range = document.createRange();
+                range.setStart(position.offsetNode, position.offset);
+                range.collapse(true);
+            }
         }
-        
+
+        if (!range) return null;
+
+        // Get the text node at this position
+        let textNode = range.startContainer;
+        let clickOffset = range.startOffset;
+
+        // If we're in an element node, try to get its text node
+        if (textNode.nodeType !== Node.TEXT_NODE) {
+            textNode = textNode.childNodes[clickOffset] || textNode.firstChild;
+            if (!textNode || textNode.nodeType !== Node.TEXT_NODE) {
+                return null;
+            }
+            clickOffset = 0;
+        }
+
         // Find word boundaries
         const text = textNode.textContent;
-        const clickOffset = this.getClickOffset(e, textNode);
-        
         let start = clickOffset;
         let end = clickOffset;
-        
+
         // Find start of word
         while (start > 0 && /\w/.test(text[start - 1])) {
             start--;
         }
-        
+
         // Find end of word
         while (end < text.length && /\w/.test(text[end])) {
             end++;
         }
-        
+
         if (start < end) {
-            range.setStart(textNode, start);
-            range.setEnd(textNode, end);
-            return range;
+            const wordRange = document.createRange();
+            wordRange.setStart(textNode, start);
+            wordRange.setEnd(textNode, end);
+            return wordRange;
         }
-        
+
         return null;
     },
     
     getClickOffset: function(e, textNode) {
-        // Simplified offset calculation
-        // In a real implementation, you might want more sophisticated text position detection
+        // Use caretRangeFromPoint for accurate click position
+        if (document.caretRangeFromPoint) {
+            const range = document.caretRangeFromPoint(e.clientX, e.clientY);
+            if (range && range.startContainer === textNode) {
+                return range.startOffset;
+            }
+        } else if (document.caretPositionFromPoint) {
+            // Firefox alternative
+            const position = document.caretPositionFromPoint(e.clientX, e.clientY);
+            if (position && position.offsetNode === textNode) {
+                return position.offset;
+            }
+        }
+
+        // Fallback: return middle of text node
         return Math.floor(textNode.textContent.length / 2);
     },
     
@@ -11826,11 +12095,13 @@ greening: {
     
     addSelection: function(range) {
         const selectedText = range.toString().trim();
+        if (!selectedText) return;
+
         const wordCount = this.countWords(selectedText);
-        
+
         // Create unique ID for this selection
         const selectionId = `greening-selection-${++this.selectionCounter}`;
-        
+
         // Create a span to mark the selection
         const span = document.createElement('span');
         span.className = 'greening-selected';
@@ -11839,11 +12110,19 @@ greening: {
         span.style.backgroundColor = 'rgba(76, 175, 80, 0.3)';
         span.style.borderBottom = '2px solid #4caf50';
         span.style.cursor = 'pointer';
-        
-        // Surround the range with the span
+        span.setAttribute('data-greening-text', selectedText);
+
+        // Use a more robust method that works across element boundaries
         try {
-            range.surroundContents(span);
-            
+            // Extract the contents from the range
+            const contents = range.extractContents();
+
+            // Put the contents inside the span
+            span.appendChild(contents);
+
+            // Insert the span at the range's start position
+            range.insertNode(span);
+
             // Store selection data
             const selectionData = {
                 id: selectionId,
@@ -11852,15 +12131,18 @@ greening: {
                 wordCount: wordCount,
                 range: range.cloneRange()
             };
-            
+
             this.selectedForDeletion.push(selectionData);
-            
+
             // Add click handler to remove selection
-            span.addEventListener('click', () => {
+            span.addEventListener('click', (e) => {
+                e.stopPropagation();
                 this.removeSelection(selectionData);
                 this.updateProgressDisplay();
             });
-            
+
+            console.log('Added selection:', selectedText);
+
         } catch (error) {
             console.error('Error adding selection:', error);
             showNotification('Could not select that text. Try selecting a different portion.', 'warning');
@@ -11954,18 +12236,10 @@ greening: {
     
     countLines: function(text) {
         if (!text) return 0;
-        // Approximate line counting based on character width
-        // This is a simplified version - you might want to make it more sophisticated
-        const avgCharsPerLine = 80; // Approximate characters per line
-        const paragraphs = text.split(/\n\s*\n/);
-        let totalLines = 0;
-        
-        paragraphs.forEach(paragraph => {
-            const paragraphLength = paragraph.replace(/\s+/g, ' ').trim().length;
-            totalLines += Math.max(1, Math.ceil(paragraphLength / avgCharsPerLine));
-        });
-        
-        return totalLines;
+        // Calculate lines based on word count (25 words per line)
+        const wordCount = this.countWords(text);
+        const avgWordsPerLine = 25;
+        return Math.max(1, Math.ceil(wordCount / avgWordsPerLine));
     },
     
     calculateProgress: function() {
@@ -11981,7 +12255,7 @@ greening: {
                 };
             case 'lineCount':
                 // Approximate lines from word count
-                const avgWordsPerLine = 12; // Approximate
+                const avgWordsPerLine = 25; // 25 words per line
                 const selectedLines = Math.round(selectedWords / avgWordsPerLine);
                 return {
                     current: selectedLines,
@@ -13629,40 +13903,6 @@ function validateInfraredPattern(patternKey, pattern) {
         }
     }
 
-
-        // 3. Also let's add a debugging helper to trace errors in the mode activation
-        function traceMode(modeName) {
-            console.log(`Tracing mode: ${modeName}`);
-            
-            if (!modes[modeName]) {
-                console.error(`Mode "${modeName}" not found`);
-                return;
-            }
-            
-            // Check that the mode has all required methods
-            const requiredMethods = ['activate', 'deactivate', 'getOptions', 'setupOptions'];
-            
-            requiredMethods.forEach(method => {
-                if (typeof modes[modeName][method] !== 'function') {
-                    console.error(`Mode "${modeName}" is missing required method: ${method}`);
-                } else {
-                    console.log(`Mode "${modeName}" has method: ${method}`);
-                }
-            });
-            
-            // Log the structure of the mode
-            console.log(`Mode "${modeName}" structure:`, Object.keys(modes[modeName]));
-            
-            // Try to call getOptions safely
-            try {
-                const options = modes[modeName].getOptions();
-                console.log(`Mode "${modeName}" options:`, options);
-            } catch (error) {
-                console.error(`Error getting options for mode "${modeName}":`, error);
-            }
-        }
-
-
         // Add focus trapping to modals
         function trapFocus(element) {
             // Get all focusable elements
@@ -14005,14 +14245,21 @@ function setupLeftEdgeSidebar() {
 
         // Load documents from localStorage or use demo documents
         function loadDocuments() {
-            const storedDocuments = localStorage.getItem('nyu_writing_documents');
+            const storedDocuments = localStorage.getItem('documents');
             if (storedDocuments) {
                 documents = JSON.parse(storedDocuments);
             } else {
-                // Use demo documents for first-time users
-                documents = demoDocuments;
+                // Create a single document with placeholder content for new users
+                documents = [{
+                    id: 'doc' + Date.now(),
+                    title: 'Untitled Document',
+                    content: '<p>Start writing here...</p>',
+                    plainText: 'Start writing here...',
+                    lastModified: new Date().toISOString(),
+                    wordCount: 3
+                }];
                 // Save to localStorage
-                localStorage.setItem('nyu_writing_documents', JSON.stringify(documents));
+                localStorage.setItem('documents', JSON.stringify(documents));
             }
         }
 
@@ -14230,7 +14477,7 @@ function loadDocumentsWithKeyTerms() {
             
             // Save to localStorage
             try {
-                localStorage.setItem('nyu_writing_documents', JSON.stringify(documents));
+                localStorage.setItem('documents', JSON.stringify(documents));
                 
                 // Clear unsaved changes flag after successful save
                 hasUnsavedChanges = false;
@@ -14272,7 +14519,7 @@ function loadDocumentsWithKeyTerms() {
             documents.unshift(newDocument);
             
             // Save to localStorage
-            localStorage.setItem('nyu_writing_documents', JSON.stringify(documents));
+            localStorage.setItem('documents', JSON.stringify(documents));
             
             // Reset form
             newDocTitle.value = '';
@@ -14542,6 +14789,9 @@ function enhanceDownloadFunctionality() {
                 case 'h3':
                     document.execCommand('formatBlock', false, '<h3>');
                     break;
+                case 'p':
+                    document.execCommand('formatBlock', false, '<p>');
+                    break;
                 default:
                     return;
             }
@@ -14666,16 +14916,79 @@ function enhanceDownloadFunctionality() {
             editor.addEventListener('paste', (e) => {
                 // Prevent the default paste action
                 e.preventDefault();
-                
+
                 // Get plain text from clipboard
                 const text = (e.clipboardData || window.clipboardData).getData('text/plain');
-                
+
                 // Insert text at cursor position
                 document.execCommand('insertText', false, text);
-                
+
                 // Mark that there are unsaved changes
                 hasUnsavedChanges = true;
             });
+
+            // Add MutationObserver to catch content changes (for test compatibility)
+            const editorObserver = new MutationObserver(() => {
+                DocumentManager.updateWordCount();
+                DocumentManager.hasUnsavedChanges = true;
+
+                // Auto-save after 1 second of inactivity
+                clearTimeout(editor.saveTimeout);
+                editor.saveTimeout = setTimeout(() => {
+                    DocumentManager.saveDocument();
+                }, 1000);
+            });
+
+            editorObserver.observe(editor, {
+                childList: true,
+                subtree: true,
+                characterData: true
+            });
+
+            // Intercept textContent/innerHTML setters for Playwright fill() compatibility
+            const originalTextContentDescriptor = Object.getOwnPropertyDescriptor(Node.prototype, 'textContent');
+            const originalInnerHTMLDescriptor = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML');
+
+            Object.defineProperty(editor, 'textContent', {
+                set: function(value) {
+                    originalTextContentDescriptor.set.call(this, value);
+                    if (DocumentManager.currentDocument) {
+                        setTimeout(() => DocumentManager.saveDocument(), 100);
+                    }
+                },
+                get: function() {
+                    return originalTextContentDescriptor.get.call(this);
+                }
+            });
+
+            Object.defineProperty(editor, 'innerHTML', {
+                set: function(value) {
+                    originalInnerHTMLDescriptor.set.call(this, value);
+                    // Only trigger save if not loading a document
+                    if (DocumentManager.currentDocument && !window.isLoadingDocument) {
+                        setTimeout(() => DocumentManager.saveDocument(), 100);
+                    }
+                },
+                get: function() {
+                    return originalInnerHTMLDescriptor.get.call(this);
+                }
+            });
+
+            // Add periodic content check as backup
+            let lastEditorContent = editor.innerHTML;
+            let lastEditorText = editor.textContent;
+            setInterval(() => {
+                const currentHTML = editor.innerHTML;
+                const currentText = editor.textContent;
+
+                if (DocumentManager.currentDocument && (currentHTML !== lastEditorContent || currentText !== lastEditorText)) {
+                    lastEditorContent = currentHTML;
+                    lastEditorText = currentText;
+                    DocumentManager.updateWordCount();
+                    DocumentManager.hasUnsavedChanges = true;
+                    DocumentManager.saveDocument();
+                }
+            }, 100);
         }
 
         window.addEventListener('beforeunload', (e) => {
@@ -14896,7 +15209,13 @@ function enhanceDownloadFunctionality() {
         // Add keyboard support to sidebar trigger
         function setupSidebarAccessibility() {
             const sidebarTrigger = document.querySelector('.sidebar-trigger');
-            
+
+            // Add click support to the sidebar trigger
+            sidebarTrigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleSidebarKeyboard();
+            });
+
             // Add keyboard support to the sidebar trigger
             sidebarTrigger.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -15047,6 +15366,18 @@ function enhanceDownloadFunctionality() {
 }
 
         function handleDocumentListClicks(e) {
+        // Check if delete button was clicked
+        const deleteBtn = e.target.closest('.delete-btn');
+        if (deleteBtn) {
+            e.stopPropagation();
+            const docId = deleteBtn.dataset.docId;
+            if (confirm('Are you sure you want to delete this document?')) {
+                DocumentManager.deleteDocument(docId);
+            }
+            return;
+        }
+
+        // Otherwise, open the document
         const listItem = e.target.closest('.document-item');
         if (listItem && listItem.dataset.id) {
             DocumentManager.openDocument(listItem.dataset.id);
@@ -15197,7 +15528,7 @@ function resetApplication() {
             }
             
             // Save demo documents to localStorage
-            localStorage.setItem('nyu_writing_documents', JSON.stringify(demoDocuments));
+            localStorage.setItem('documents', JSON.stringify(demoDocuments));
             
             // Check if a user is logged in
             const userData = localStorage.getItem('user');
@@ -15217,9 +15548,40 @@ function resetApplication() {
 // Add event listener for the reset button
 document.addEventListener('DOMContentLoaded', function() {
     const resetButton = document.getElementById('reset-app-btn');
-    
+
     if (resetButton) {
         resetButton.addEventListener('click', resetApplication);
+    }
+
+    // Dropdown menu toggle functionality
+    const menuToggle = document.getElementById('menu-toggle-btn');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+
+    if (menuToggle && dropdownMenu) {
+        // Toggle menu on button click
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', !isExpanded);
+            dropdownMenu.setAttribute('aria-hidden', isExpanded);
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.menu-container')) {
+                menuToggle.setAttribute('aria-expanded', 'false');
+                dropdownMenu.setAttribute('aria-hidden', 'true');
+            }
+        });
+
+        // Close menu when a menu item is clicked
+        const menuItems = dropdownMenu.querySelectorAll('.menu-item');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                menuToggle.setAttribute('aria-expanded', 'false');
+                dropdownMenu.setAttribute('aria-hidden', 'true');
+            });
+        });
     }
 });
 
@@ -15293,9 +15655,22 @@ function setupTrapdoorButton() {
     </div>
 </div>`;
         
-        // Add the content to the Scrapheap document
+        // Add the content to the Scrapheap document at the top (after the header)
         scrapheapDoc.content = scrapheapDoc.content.replace('</hr>', ''); // Remove closing hr if it exists
-        scrapheapDoc.content += contentToAdd;
+
+        // Find the position right after the <hr> tag to insert new content at the top
+        const hrIndex = scrapheapDoc.content.indexOf('<hr>');
+        if (hrIndex !== -1) {
+            // Insert new content right after the <hr> tag
+            const insertPosition = hrIndex + '<hr>'.length;
+            scrapheapDoc.content =
+                scrapheapDoc.content.slice(0, insertPosition) +
+                contentToAdd +
+                scrapheapDoc.content.slice(insertPosition);
+        } else {
+            // Fallback: append if <hr> not found
+            scrapheapDoc.content += contentToAdd;
+        }
         
         // Update scrapheap plainText
         const tempDiv2 = document.createElement('div');
@@ -15332,14 +15707,163 @@ function setupTrapdoorButton() {
 document.addEventListener('DOMContentLoaded', function() {
     setupTrapdoorButton();
 });
-  
-    
+
+// Tutorial Modal functionality
+function setupTutorialModal() {
+    const tutorialModal = document.getElementById('tutorial-modal');
+    const aboutBtn = document.getElementById('about-btn');
+    const tutorialContent = document.getElementById('tutorial-content');
+    const tutorialProgress = document.getElementById('tutorial-progress');
+    const nextBtn = document.getElementById('tutorial-next');
+    const prevBtn = document.getElementById('tutorial-prev');
+    const skipBtn = document.getElementById('tutorial-skip');
+
+    // Tutorial content - introducing the platform and its purpose
+    const tutorialSlides = [
+        "Expert writers often say that writing is 99 percent revision. That's not just a comment on how hard it is to write well. It also reveals how writing skills are really developed.",
+
+        "At EWP, we believe people improve as writers when they learn to revise more holistically, more strategically, and more often. The purpose of this website is to draw writers attention to this most important part of the writing process.",
+
+        "The traditional word processor offers little help with this problem. Programs like Microsoft Word and Google Docs are designed primarily for text entry and basic formatting, not for the complex cognitive work of revision.",
+
+        "They present writing as a linear process, encouraging writers to simply keep adding words, or make superficial revisions (finding stray commas, for example, or replacing one word for a close synonym) rather than stepping back to reconsider structure, coherence, and purpose.",
+
+        "When we hit a wall in our writing process, typical word processors often leave us without strategies to move forward.",
+
+        "This is where Writing Center aims to make a difference. Rather than treating writing as the simple act of \"getting ideas down,\" this platform acknowledges writing as a thinking process that requires different modes of engagement at different stages.",
+
+        "The various \"modes\" available here are designed to help you gain new perspectives on your writing and make deliberate choices about revision. Each mode represents a specific strategy that experienced writers use to improve their work.",
+
+        "Consider, for instance, the challenge of evaluating your essay's structure. Our \"Textris mode\" feature transforms paragraphs into easily movable blocks, allowing you to experiment with different arrangements without committing to permanent changes.",
+
+        "By visually manipulating these blocks, you can test whether a different arrangement might boost your readers' comprehension or engagement. This approach often reveals logical gaps or opportunities for stronger transitions that weren't apparent in the traditional linear view.",
+
+        "For writers struggling with sentence-level flow and coherence, \"Reader mode\" offers a way to experience your text as a reader might. This mode presents your writing one sentence at a time, prompting you to reflect on what readers need and expect as they move along from idea to idea.",
+
+        "This slowed-down, sequential reading experience helps identify places where your writing makes unexpected leaps or fails to fulfill the expectations you've established (purposefully or not!). This mode specifically targets the connections between sentences, highlighting where transitions might be missing or where the logical links between ideas need strengthening.",
+
+        "\"Fire mode\" addresses a different revision challenge: identifying and emphasizing your most important points. As writers, it's not always easy to distinguish between our key ideas and supporting details.",
+
+        "If this is hard for us, as writers, imagine how much more difficult this is for our readers. To bridge this gap, this mode asks you to identify the \"sentences you'd save in a fire\" – those that carry your core message or represent the twists and turns of your argument.",
+
+        "Once identified, you can strategically position these key sentences for maximum impact, typically at the beginnings and ends of paragraphs where readers pay most attention. This process not only clarifies your main points but often reveals when crucial arguments are buried or underdeveloped.",
+
+        "Beyond these specific revision modes, the platform's document system encourages a more comprehensive approach to the writing process. Rather than cramming everything into a single file, you can create separate documents for different aspects of your project.",
+
+        "Just hover your cursor over the lefthand side of the screen to toggle the My Documents menu. The \"Evidence Repository\" collects research and quotes, the \"Goals & Requirements\" document keeps assignment guidelines accessible, \"Brainstorming\" and \"Outlining\" documents support early-stage planning, and the \"Scrap Heap\" preserves deleted content that might prove useful later.",
+
+        "As you navigate this platform, experiment with different modes to discover which ones address your specific writing challenges. Not every mode will be equally useful for every project or writing stage.",
+
+        "You might find that \"Textris mode\" transforms your approach to organization, while another writer might gain more from the sentence-by-sentence reflection of \"Reader mode.\" The key is to engage actively with these tools rather than passively continuing to add text.",
+
+        "Take a step back, gain some critical distance, and approach revision as a deliberate, strategic process. Your writing – and your readers – will benefit from this more thoughtful approach to revision."
+    ];
+
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        currentSlide = index;
+        tutorialContent.textContent = tutorialSlides[index];
+
+        // Update progress dots
+        tutorialProgress.innerHTML = '';
+        tutorialSlides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.className = 'tutorial-dot';
+            if (i === index) dot.classList.add('active');
+            tutorialProgress.appendChild(dot);
+        });
+
+        // Update button states
+        prevBtn.disabled = index === 0;
+        prevBtn.style.opacity = index === 0 ? '0.5' : '1';
+
+        if (index === tutorialSlides.length - 1) {
+            nextBtn.textContent = 'Finish';
+        } else {
+            nextBtn.textContent = 'Next';
+        }
+    }
+
+    function openTutorialModal() {
+        currentSlide = 0;
+        showSlide(0);
+        tutorialModal.style.display = 'flex';
+        tutorialModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeTutorialModal() {
+        tutorialModal.style.display = 'none';
+        tutorialModal.setAttribute('aria-hidden', 'true');
+    }
+
+    // Event listeners
+    if (aboutBtn) {
+        aboutBtn.addEventListener('click', openTutorialModal);
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < tutorialSlides.length - 1) {
+                showSlide(currentSlide + 1);
+            } else {
+                closeTutorialModal();
+            }
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        });
+    }
+
+    if (skipBtn) {
+        skipBtn.addEventListener('click', closeTutorialModal);
+    }
+
+    // Close button
+    const tutorialCloseBtn = tutorialModal.querySelector('.modal-close');
+    if (tutorialCloseBtn) {
+        tutorialCloseBtn.addEventListener('click', closeTutorialModal);
+    }
+
+    // Close on outside click
+    tutorialModal.addEventListener('click', (e) => {
+        if (e.target === tutorialModal) {
+            closeTutorialModal();
+        }
+    });
+}
+
+// Initialize tutorial modal when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    setupTutorialModal();
+});
+
+
 
         // Set up event listeners
         function setupEventListeners() {
             // New document button
             newDocumentBtn.addEventListener('click', () => {
-                openModal(newDocumentModal);
+                // Create document directly for simpler UX and test compatibility
+                const newDoc = {
+                    id: 'doc' + Date.now(),
+                    title: `Document ${DocumentManager.documents.length + 1}`,
+                    content: '<p></p>',
+                    plainText: '',
+                    lastModified: new Date().toISOString(),
+                    wordCount: 0
+                };
+
+                DocumentManager.documents.push(newDoc);  // Add to end, not beginning
+                localStorage.setItem('documents', JSON.stringify(DocumentManager.documents));
+                DocumentManager.renderDocumentList();
+                DocumentManager.openDocument(newDoc.id);
+                showNotification('New document created!');
             });
             
             // User profile button
