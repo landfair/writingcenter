@@ -2114,22 +2114,139 @@
                 grid-template-rows: auto auto auto;
                 gap: 10px;
             }
-            
-            .meta-says-column, 
+
+            .meta-says-column,
             .meta-does-column {
                 border-left: none;
                 border-right: none;
                 border-top: 3px solid var(--primary-color, #57068c);
             }
-            
+
             .meta-navigation {
                 flex-direction: column;
                 gap: 10px;
             }
-            
+
             .meta-nav-buttons {
                 width: 100%;
                 justify-content: space-between;
+            }
+        }
+
+        /* Print styles for Says/Does PDF */
+        @media print {
+            @page {
+                margin: 0.5in 0.4in;
+                size: letter;
+            }
+
+            body * {
+                visibility: hidden;
+            }
+
+            #print-container, #print-container * {
+                visibility: visible;
+            }
+
+            #print-container {
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100%;
+                margin: 0;
+                padding: 0.5in 0.4in;
+            }
+
+            .print-page {
+                page-break-after: auto;
+                width: 100%;
+            }
+
+            .print-title {
+                text-align: center;
+                font-size: 14pt;
+                font-weight: bold;
+                margin-bottom: 0.15em;
+                font-family: 'Times New Roman', serif;
+                color: #1a1a1a;
+            }
+
+            .print-subtitle {
+                text-align: center;
+                font-size: 10pt;
+                font-style: italic;
+                margin-bottom: 0.75em;
+                font-family: 'Georgia', serif;
+                color: #666;
+                border-bottom: 1px solid #ddd;
+                padding-bottom: 0.35em;
+            }
+
+            .print-paragraph-wrapper {
+                display: table;
+                width: 100%;
+                margin-bottom: 1.25em;
+                page-break-inside: avoid;
+            }
+
+            .print-says-margin {
+                display: table-cell;
+                width: 1.6in;
+                font-size: 8.5pt;
+                color: #5a4a8a;
+                font-family: 'Georgia', serif;
+                line-height: 1.35;
+                padding: 0.15in 0.1in;
+                text-align: right;
+                vertical-align: top;
+                border-right: 2px solid #e8e0f5;
+                background-color: #fafafa;
+            }
+
+            .print-says-margin:before {
+                content: "SAYS: ";
+                font-weight: bold;
+                font-size: 7pt;
+                color: #5a4a8a;
+                display: block;
+                margin-bottom: 0.1em;
+                letter-spacing: 0.5pt;
+            }
+
+            .print-paragraph {
+                display: table-cell;
+                width: auto;
+                line-height: 1.75;
+                font-family: 'Times New Roman', serif;
+                font-size: 11pt;
+                color: #000;
+                text-align: justify;
+                padding: 0.15in 0.2in;
+                vertical-align: top;
+            }
+
+            .print-does-margin {
+                display: table-cell;
+                width: 1.6in;
+                font-size: 8.5pt;
+                color: #2d5a2d;
+                font-family: 'Georgia', serif;
+                line-height: 1.35;
+                padding: 0.15in 0.1in;
+                text-align: left;
+                vertical-align: top;
+                border-left: 2px solid #d5e8d5;
+                background-color: #fafafa;
+            }
+
+            .print-does-margin:before {
+                content: "DOES: ";
+                font-weight: bold;
+                font-size: 7pt;
+                color: #2d5a2d;
+                display: block;
+                margin-bottom: 0.1em;
+                letter-spacing: 0.5pt;
             }
         }
 
@@ -8027,13 +8144,22 @@ const demoDocuments = [
                             
                             const exportButton = document.createElement('button');
                             exportButton.className = 'reader-footer-button secondary';
-                            exportButton.innerHTML = '<i class="fas fa-file-export"></i> Export Analysis';
+                            exportButton.innerHTML = '<i class="fas fa-save"></i> Save to Sidebar';
                             exportButton.addEventListener('click', () => {
                                 this.saveCurrentParagraphData();
                                 this.exportAnalysis();
                             });
-                            
+
+                            const printButton = document.createElement('button');
+                            printButton.className = 'reader-footer-button secondary';
+                            printButton.innerHTML = '<i class="fas fa-print"></i> Print PDF';
+                            printButton.addEventListener('click', () => {
+                                this.saveCurrentParagraphData();
+                                this.printAnalysis();
+                            });
+
                             centerGroup.appendChild(exportButton);
+                            centerGroup.appendChild(printButton);
                             
                             // Next button
                             const nextButton = document.createElement('button');
@@ -8227,46 +8353,113 @@ const demoDocuments = [
                         exportAnalysis: function() {
                             // Create a new document with the analysis
                             const title = (DocumentManager.currentDocument?.title || 'Untitled') + ' - Says/Does Analysis';
-                            
+
                             // Prepare content for the new document
                             let content = '<h1>Says/Does Analysis</h1>';
                             content += `<h2>${DocumentManager.currentDocument?.title || 'Untitled Document'}</h2>`;
                             content += '<p>This outline analyzes what each paragraph says (content) and does (function).</p>';
-                            
+
                             // Create a table for the analysis
                             content += '<table style="width:100%; border-collapse: collapse; margin-top: 20px;">';
                             content += '<tr style="background-color: #f2f2f2;">';
-                            content += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">¶</th>';
+                            content += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left; width: 30px;">¶</th>';
+                            content += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Paragraph</th>';
                             content += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Says (Content)</th>';
                             content += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Does (Function)</th>';
                             content += '</tr>';
-                            
+
                             // Add each paragraph's analysis to the table
                             this.paragraphs.forEach((paragraph, index) => {
                                 const says = this.paragraphData[index]?.says || '';
                                 const does = this.paragraphData[index]?.does || '';
-                                
+                                const paragraphText = paragraph.text || paragraph.html || '';
+
                                 content += '<tr>';
-                                content += `<td style="border: 1px solid #ddd; padding: 8px;">${index + 1}</td>`;
-                                content += `<td style="border: 1px solid #ddd; padding: 8px;">${says}</td>`;
-                                content += `<td style="border: 1px solid #ddd; padding: 8px;">${does}</td>`;
+                                content += `<td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: center;">${index + 1}</td>`;
+                                content += `<td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; background-color: #f9f9f9;">${paragraphText}</td>`;
+                                content += `<td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; color: #5a4a8a; font-style: italic;">${says}</td>`;
+                                content += `<td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; color: #2d5a2d; font-weight: 600;">${does}</td>`;
                                 content += '</tr>';
                             });
-                            
+
                             content += '</table>';
-                            
-                            // Create new document with this content
-                            const docId = DocumentManager.createNewDocument(title, '');
-                            
-                            // Find the new document and update its content
-                            const newDoc = DocumentManager.documents.find(doc => doc.id === docId);
-                            if (newDoc) {
-                                newDoc.content = content;
-                                DocumentManager.saveDocument();
-                                
-                                // Show notification
-                                showNotification('Analysis exported to a new document');
+
+                            // Create the new document object directly
+                            const newDocument = {
+                                id: 'doc' + Date.now(),
+                                title: title,
+                                content: content,
+                                plainText: content.replace(/<[^>]*>/g, ''), // Strip HTML tags for plain text
+                                lastModified: new Date().toISOString(),
+                                wordCount: countWords(content.replace(/<[^>]*>/g, ''))
+                            };
+
+                            // Add to documents list
+                            DocumentManager.documents.unshift(newDocument);
+
+                            // Save to localStorage
+                            localStorage.setItem('documents', JSON.stringify(DocumentManager.documents));
+
+                            // Update the document list UI
+                            DocumentManager.renderDocumentList();
+
+                            // Show notification
+                            showNotification('Analysis saved to sidebar! Check "My Documents" for the new document.');
+                        },
+
+                        // Print the analysis as a beautiful PDF with margins
+                        printAnalysis: function() {
+                            // Remove any existing print container
+                            const existingContainer = document.getElementById('print-container');
+                            if (existingContainer) {
+                                existingContainer.remove();
                             }
+
+                            // Create a hidden print container (positioned off-screen)
+                            const printContainer = document.createElement('div');
+                            printContainer.id = 'print-container';
+                            printContainer.style.position = 'fixed';
+                            printContainer.style.left = '-9999px';
+                            printContainer.style.top = '0';
+
+                            // Add title and subtitle
+                            const title = DocumentManager.currentDocument?.title || 'Untitled Document';
+                            printContainer.innerHTML = `
+                                <div class="print-title">${title}</div>
+                                <div class="print-subtitle">Says/Does Analysis</div>
+                            `;
+
+                            // Add each paragraph with its says/does in margins
+                            this.paragraphs.forEach((paragraph, index) => {
+                                const says = this.paragraphData[index]?.says || '';
+                                const does = this.paragraphData[index]?.does || '';
+
+                                // Get the paragraph text (paragraphs are stored as objects with 'text' and 'html' properties)
+                                const paragraphText = paragraph.text || paragraph.html || '';
+
+                                printContainer.innerHTML += `
+                                    <div class="print-paragraph-wrapper">
+                                        <div class="print-says-margin">${says}</div>
+                                        <div class="print-paragraph">${paragraphText}</div>
+                                        <div class="print-does-margin">${does}</div>
+                                    </div>
+                                `;
+                            });
+
+                            // Append to body
+                            document.body.appendChild(printContainer);
+
+                            // Trigger print dialog
+                            setTimeout(() => {
+                                window.print();
+
+                                // Clean up after printing
+                                setTimeout(() => {
+                                    printContainer.remove();
+                                }, 1000);
+                            }, 100);
+
+                            showNotification('Opening print dialog...');
                         }
                     },
 
