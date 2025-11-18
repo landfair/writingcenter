@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Writing Center dot org</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -30,7 +30,7 @@
         }
 
         body {
-            font-family: 'Playfair Display', serif;
+            font-family: 'NYU Perstare', 'Montserrat', sans-serif;
             background-color: #f8f8fa; /* Off-white background for the body */
             color: #333;
             line-height: 1.6;
@@ -50,7 +50,7 @@
             right: 0;
             height: 70px;
             background-color: white; /* White header */
-            border-bottom: 3px solid #57068c; /* Light purple bottom border (NYU violet) */
+            border-bottom: 3px solid #57068c; /* NYU violet bottom border */
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             padding: 0 20px;
             display: flex;
@@ -98,7 +98,7 @@
             border-right: 1.5px solid #57068c;
             border-bottom: 1.5px solid #57068c;
             transform: rotate(45deg);
-            transition: transform 0.3s ease;
+            transition: transform 0.2s ease;
             margin-bottom: 2px;
         }
 
@@ -137,7 +137,7 @@
             padding: 12px 20px;
             text-align: left;
             cursor: pointer;
-            font-family: 'Playfair Display', serif;
+            font-family: 'NYU Perstare', 'Montserrat', sans-serif;
             color: #57068c;
             font-size: 0.9rem;
             transition: background-color 0.2s ease;
@@ -179,7 +179,7 @@
         }
 
         h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'NYU Perstare', 'Montserrat', sans-serif;
             color: #57068c; /* NYU violet for headings */
         }
 
@@ -280,7 +280,7 @@
 
         /* Move toggle button with sidebar */
         .sidebar-collapsed .sidebar-toggle {
-            left: 10px; /* Small margin when collapsed */
+            left: 10px;
         }
 
         .sidebar-toggle:hover {
@@ -306,7 +306,7 @@
             bottom: 0;
             width: 250px;
             background-color: white;
-            border-right: 1px solid #eee;
+            border-right: 1px solid #ddd;
             padding: 20px;
             overflow-y: auto;
             z-index: 100;
@@ -342,7 +342,7 @@
         .sidebar-header {
             margin-bottom: 15px;
             padding-bottom: 10px;
-            border-bottom: 1px solid #f4ebfa;
+            border-bottom: 1px solid #ddd;
         }
 
        /* When collapsed, transform the sidebar off-screen */
@@ -449,13 +449,13 @@
             display: flex;
             gap: 10px;
             align-items: center;
-            padding: 3px;
+            padding: 5px;
             border-radius: 4px;
             overflow: visible !important;
         }
 
         .toolbar-btn {
-            background: none;
+            background: white;
             border: 1px solid #ddd;
             border-radius: 4px;
             padding: 5px 10px;
@@ -554,13 +554,13 @@
 
         .textris-section {
             background-color: #f4ebfa;
-            padding: 3px 10px;
+            padding: 5px 10px;
             border-radius: 4px;
             border: 1px solid #e0d0eb;
             display: flex;
             align-items: center;
         }
-        
+
         .textris-btn {
             font-weight: 500;
             color: #57068c;
@@ -574,16 +574,16 @@
             align-items: center;
             gap: 6px;
         }
-        
+
         .textris-btn:hover {
             background-color: #e0d0eb;
         }
-        
+
         .textris-btn.active {
             background-color: #57068c;
             color: white;
         }
-        
+
         .textris-select {
             margin-left: 8px;
             padding: 5px 8px;
@@ -1508,6 +1508,571 @@
     font-size: 12px;
 }
 
+/* Toulmin Mode Styles */
+.claims-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.claims-modal {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    max-width: 900px;
+    height: 90vh;
+    max-height: 800px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.claims-modal-header {
+    padding: 15px 20px;
+    border-bottom: 2px solid #e3f2fd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.claims-modal-header h3 {
+    color: #1976d2;
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.claims-modal-close {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #666;
+    cursor: pointer;
+}
+
+.claims-modal-close:hover {
+    color: #333;
+}
+
+.claims-modal-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.claims-modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #e3f2fd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.claims-status-text {
+    color: #1976d2;
+    font-weight: 500;
+}
+
+.claims-footer-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.claims-footer-button {
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.claims-footer-button.secondary {
+    background-color: #e3f2fd;
+    border: 1px solid #1976d2;
+    color: #1976d2;
+}
+
+.claims-footer-button.secondary:hover {
+    background-color: #bbdefb;
+}
+
+.claims-mode-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.claims-sentence-block {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.1);
+    padding: 20px;
+    animation: fadeSlideIn 0.5s ease;
+    border-left: 3px solid #1976d2;
+}
+
+.claims-sentence {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e3f2fd;
+}
+
+.claims-classification-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.claims-prompt {
+    font-style: italic;
+    color: #444;
+    padding: 10px 12px;
+    background-color: #f0f7ff;
+    border-radius: 4px;
+}
+
+.claims-prompt strong {
+    color: #1976d2;
+}
+
+.claims-button-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.claims-classify-button {
+    flex: 1;
+    min-width: 150px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.claims-classify-button i {
+    font-size: 16px;
+}
+
+.observation-btn {
+    background-color: #e3f2fd;
+    border: 2px solid #1976d2;
+    color: #1976d2;
+}
+
+.observation-btn:hover {
+    background-color: #bbdefb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(25, 118, 210, 0.2);
+}
+
+.observation-btn.selected {
+    background-color: #1976d2;
+    color: white;
+    border-color: #0d47a1;
+}
+
+.claim-btn {
+    background-color: #fff9c4;
+    border: 2px solid #f57c00;
+    color: #f57c00;
+}
+
+.claim-btn:hover {
+    background-color: #fff59d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(245, 124, 0, 0.2);
+}
+
+.claim-btn.selected {
+    background-color: #f57c00;
+    color: white;
+    border-color: #e65100;
+}
+
+.pass-btn {
+    background-color: #f5f5f5;
+    border: 2px solid #9e9e9e;
+    color: #666;
+}
+
+.pass-btn:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pass-btn.selected {
+    background-color: #9e9e9e;
+    color: white;
+    border-color: #616161;
+}
+
+/* Highlighting styles for observations and claims */
+.claims-observation {
+    background-color: #bbdefb;
+    padding: 2px 4px;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(25, 118, 210, 0.2);
+}
+
+/* Toulmin Mode specific styles */
+.toulmin-stage-indicator {
+    padding: 15px 20px;
+    background-color: #e3f2fd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #1976d2;
+    border-left: 4px solid #1976d2;
+}
+
+.toulmin-stage-indicator.stage-2 {
+    background-color: #fff3e0;
+    color: #f57c00;
+    border-left-color: #f57c00;
+}
+
+.toulmin-stage-indicator.stage-3 {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+    border-left-color: #7b1fa2;
+}
+
+.toulmin-instructions {
+    padding: 15px 20px;
+    background-color: #f0f7ff;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.6;
+}
+
+.toulmin-instructions strong {
+    color: #1976d2;
+}
+
+.toulmin-sentences-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.toulmin-sentence {
+    padding: 15px 18px;
+    background-color: #fff;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.toulmin-sentence:hover {
+    background-color: #f5f5f5;
+    border-color: #bdbdbd;
+    transform: translateX(4px);
+}
+
+.toulmin-sentence.highlighted-claim {
+    background-color: #fff9c4;
+    border-color: #f57c00;
+    border-width: 3px;
+    font-weight: 500;
+}
+
+.toulmin-sentence.highlighted-claim:hover {
+    background-color: #fff59d;
+}
+
+.toulmin-sentence.highlighted-evidence {
+    background-color: #bbdefb;
+    border-color: #1976d2;
+    border-width: 3px;
+    font-weight: 500;
+}
+
+.toulmin-sentence.highlighted-evidence:hover {
+    background-color: #90caf9;
+}
+
+.toulmin-sentence.shown-claim {
+    background-color: #fff9c4;
+    border-color: #f57c00;
+    border-width: 2px;
+    opacity: 0.7;
+    cursor: default;
+}
+
+.toulmin-sentence.shown-claim:hover {
+    background-color: #fff9c4;
+    transform: none;
+}
+
+.claims-footer-button.primary {
+    background-color: #1976d2;
+    border: 1px solid #0d47a1;
+    color: white;
+    font-weight: 600;
+}
+
+.claims-footer-button.primary:hover {
+    background-color: #1565c0;
+}
+
+/* Current Claim Display in Stage 2 */
+.current-claim-display {
+    padding: 15px 18px;
+    background-color: #fff9c4;
+    border-left: 4px solid #f57c00;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+/* Warrant Stage Styles */
+.warrant-block {
+    background-color: #fff;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.warrant-claim-display {
+    padding: 12px 15px;
+    background-color: #fff9c4;
+    border-left: 4px solid #f57c00;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.warrant-evidence-display {
+    padding: 12px 15px;
+    background-color: #e3f2fd;
+    border-left: 4px solid #1976d2;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.warrant-evidence-display ul {
+    margin: 8px 0 0 20px;
+    padding: 0;
+}
+
+.warrant-evidence-display li {
+    margin-bottom: 6px;
+}
+
+.warrant-label {
+    display: block;
+    font-weight: 600;
+    color: #7b1fa2;
+    margin-bottom: 8px;
+    margin-top: 15px;
+}
+
+.warrant-textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-family: 'NYU Perstare', 'Montserrat', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+    transition: border-color 0.2s ease;
+}
+
+.warrant-textarea:focus {
+    outline: none;
+    border-color: #7b1fa2;
+    box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.1);
+}
+
+.warrant-textarea.small {
+    min-height: 60px;
+}
+
+.audience-question {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #444;
+}
+
+.audience-options {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.audience-option-btn {
+    flex: 1;
+    padding: 12px 20px;
+    background-color: #f5f5f5;
+    border: 2px solid #bdbdbd;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.audience-option-btn:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+.audience-option-btn.selected {
+    background-color: #7b1fa2;
+    border-color: #6a1b9a;
+    color: white;
+}
+
+.rebuttal-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px dashed #e0e0e0;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.claims-claim {
+    background-color: #fff59d;
+    padding: 2px 4px;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(245, 124, 0, 0.2);
+}
+
+/* Warrant Annotations in Document */
+.warrant-annotation {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 8px 12px;
+    background-color: #f3e5f5;
+    border-left: 3px solid #7b1fa2;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.4;
+    max-width: 400px;
+    vertical-align: middle;
+    cursor: help;
+}
+
+.warrant-icon {
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 16px;
+}
+
+.warrant-text {
+    color: #4a148c;
+}
+
+.warrant-text strong {
+    color: #7b1fa2;
+    font-weight: 600;
+}
+
+/* Claims highlighting banner */
+.claims-highlighting-banner {
+    background: linear-gradient(135deg, #e3f2fd 0%, #fff9c4 100%);
+    border-bottom: 2px solid #1976d2;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.claims-banner-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.claims-banner-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1976d2;
+    font-size: 14px;
+}
+
+.claims-banner-text i {
+    font-size: 18px;
+}
+
+.claims-banner-close {
+    background-color: white;
+    border: 2px solid #1976d2;
+    color: #1976d2;
+    padding: 6px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.claims-banner-close:hover {
+    background-color: #1976d2;
+    color: white;
+}
+
 
 
     /* Remove padding when sidebar is collapsed */
@@ -1776,16 +2341,18 @@
 #login-error.show {
   display: block !important;
   animation: slideInError 0.3s ease;
-}/* Import Shadows Into Light font */
-@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
-
-
+}
 
 /* Header title styling for all themes */
 .header-title {
-  font-family: 'Shadows Into Light', cursive;
+  font-family: 'NYU Perstare', 'Montserrat', sans-serif;
   font-size: 1.8rem;
-  font-weight: 400;
+  font-weight: 600;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  color: #57068c;
 }
   
   @keyframes fadeIn {
@@ -3188,7 +3755,7 @@
 }
 
 .pomodoro-popup-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'NYU Perstare', 'Montserrat', sans-serif;
     color: var(--primary-color, #57068c);
     font-size: 18px;
     margin: 0;
@@ -3748,7 +4315,7 @@
 .word-cloud-sidebar {
     width: 250px;
     padding: 20px;
-    border-right: 1px solid #eee;
+    border-right: 1px solid #ddd;
     background-color: #f9f9f9;
     overflow-y: auto;
 }
@@ -4115,7 +4682,7 @@
                 <img src="https://i.imgur.com/iIODsNl.png" alt="NYU Logo" />        
             </a>
         </div>
-        <div class="header-title" id="app-title">writing-center.org</div>
+        <div class="header-title" id="app-title">Writing Center</div>
         <div class="header-right">
             <div class="menu-container">
                 <button id="menu-toggle-btn" class="menu-toggle" aria-label="Open menu" aria-expanded="false">
@@ -4396,6 +4963,18 @@
                     <p class="mode-description">Glimpse your writing through your readers' eyes.</p>
                     <div class="mode-options">
                         <button class="activate-mode-btn" aria-label="Activate Reader mode">Activate</button>
+                    </div>
+                </div>
+
+                <!-- Toulmin Mode -->
+                <div class="mode-card" data-mode="claims" role="listitem">
+                    <div class="mode-card-header">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <h5>Toulmin Mode</h5>
+                    </div>
+                    <p class="mode-description">Identify your main claims and the evidence that supports them.</p>
+                    <div class="mode-options">
+                        <button class="activate-mode-btn" aria-label="Activate Toulmin mode">Activate</button>
                     </div>
                 </div>
 
@@ -5374,7 +5953,7 @@ const demoDocuments = [
                                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                                 <title>Pomodoro Timer</title>
                                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-                                <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+                                <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
                                 <style>
                                     :root {
                                         --primary-color: ${primaryColor};
@@ -5414,7 +5993,7 @@ const demoDocuments = [
                                         gap: 16px;
                                         z-index: 10;
                                         flex-shrink: 0;
-                                        border-bottom: 1px solid var(--border-color);
+                                        border-bottom: 1px solid #ddd;
                                     }
                                     
                                     .pomodoro-title-area {
@@ -5424,9 +6003,9 @@ const demoDocuments = [
                                     }
                                     
                                     .pomodoro-title {
-                                        font-family: 'Playfair Display', serif;
+                                        font-family: 'NYU Perstare', 'Montserrat', sans-serif;
                                         font-size: 1.3rem;
-                                        color: var(--primary-color);
+                                        color: #57068c;
                                         font-weight: 600;
                                         white-space: nowrap;
                                     }
@@ -5438,7 +6017,7 @@ const demoDocuments = [
                                         background-color: #f5f5f7;
                                         border-radius: 24px;
                                         padding: 6px 15px;
-                                        border: 1px solid var(--border-color);
+                                        border: 1px solid #ddd;
                                         gap: 8px;
                                         margin-left: auto;
                                         position: relative;
@@ -5474,7 +6053,7 @@ const demoDocuments = [
                                     
                                     .pomodoro-session-info {
                                         font-size: 0.8rem;
-                                        color: var(--text-secondary);
+                                        color: #666;
                                         white-space: nowrap;
                                     }
                                     
@@ -5493,7 +6072,7 @@ const demoDocuments = [
                                         align-items: center;
                                         justify-content: center;
                                         cursor: pointer;
-                                        color: var(--text-secondary);
+                                        color: #666;
                                         font-size: 0.9rem;
                                         transition: all 0.2s ease;
                                     }
@@ -5504,14 +6083,14 @@ const demoDocuments = [
                                     }
                                     
                                     .timer-btn.active {
-                                        color: var(--primary-color);
+                                        color: #57068c;
                                     }
                                     
                                     .pomodoro-settings-btn {
                                         background: none;
                                         border: none;
                                         font-size: 1.1rem;
-                                        color: var(--text-secondary);
+                                        color: #666;
                                         cursor: pointer;
                                         width: 32px;
                                         height: 32px;
@@ -5524,7 +6103,7 @@ const demoDocuments = [
                                     
                                     .pomodoro-settings-btn:hover {
                                         background-color: rgba(0,0,0,0.05);
-                                        color: var(--primary-color);
+                                        color: #57068c;
                                     }
                                     
                                     /* Tasks Section - Maximized Space */
@@ -5553,7 +6132,7 @@ const demoDocuments = [
                                     
                                     #tasks-counter {
                                         font-size: 0.85rem;
-                                        color: var(--text-secondary);
+                                        color: #666;
                                         background-color: #f5f5f7;
                                         padding: 3px 10px;
                                         border-radius: 12px;
@@ -5628,7 +6207,7 @@ const demoDocuments = [
                                         width: 16px;
                                         height: 16px;
                                         cursor: pointer;
-                                        accent-color: var(--primary-color);
+                                        accent-color: #57068c;
                                         margin-right: 10px;
                                     }
                                     
@@ -5687,7 +6266,7 @@ const demoDocuments = [
                                     }
                                     
                                     .pomodoro-task-add-subtask:hover {
-                                        color: var(--primary-color);
+                                        color: #57068c;
                                         background-color: rgba(87,6,140,0.1);
                                     }
                                     
@@ -5714,7 +6293,7 @@ const demoDocuments = [
                                     /* Add Task Area - Fixed to bottom */
                                     .pomodoro-add-task-area {
                                         padding: 12px 16px;
-                                        border-top: 1px solid var(--border-color);
+                                        border-top: 1px solid #ddd;
                                         background-color: #f8f9fa;
                                     }
                                     
@@ -5736,11 +6315,11 @@ const demoDocuments = [
                                     
                                     .pomodoro-add-task-input:focus {
                                         outline: none;
-                                        border-color: var(--primary-color);
+                                        border-color: #57068c;
                                     }
                                     
                                     .pomodoro-add-task-btn {
-                                        background-color: var(--primary-color);
+                                        background-color: #57068c;
                                         color: white;
                                         border: none;
                                         border-radius: 4px;
@@ -5771,7 +6350,7 @@ const demoDocuments = [
                                         bottom: 0;
                                         left: 0;
                                         height: 3px;
-                                        background-color: var(--primary-color);
+                                        background-color: #57068c;
                                         transition: width 1s linear;
                                     }
                                     
@@ -5806,13 +6385,13 @@ const demoDocuments = [
                                         justify-content: space-between;
                                         align-items: center;
                                         padding: 16px;
-                                        border-bottom: 1px solid var(--border-color);
+                                        border-bottom: 1px solid #ddd;
                                     }
                                     
                                     .settings-title {
                                         font-size: 1.2rem;
                                         font-weight: 600;
-                                        color: var(--primary-color);
+                                        color: #57068c;
                                     }
                                     
                                     .settings-close {
@@ -5846,7 +6425,7 @@ const demoDocuments = [
                                     .settings-section-title {
                                         font-weight: 600;
                                         margin-bottom: 12px;
-                                        color: var(--primary-color);
+                                        color: #57068c;
                                     }
                                     
                                     .settings-group {
@@ -5862,7 +6441,7 @@ const demoDocuments = [
                                     
                                     .settings-value {
                                         font-weight: 600;
-                                        color: var(--primary-color);
+                                        color: #57068c;
                                     }
                                     
                                     .settings-slider {
@@ -5881,7 +6460,7 @@ const demoDocuments = [
                                         width: 16px;
                                         height: 16px;
                                         border-radius: 50%;
-                                        background: var(--primary-color);
+                                        background: #57068c;
                                         cursor: pointer;
                                     }
                                     
@@ -5893,18 +6472,18 @@ const demoDocuments = [
                                     
                                     .settings-radio input[type="radio"] {
                                         margin-right: 8px;
-                                        accent-color: var(--primary-color);
+                                        accent-color: #57068c;
                                     }
                                     
                                     .settings-footer {
                                         display: flex;
                                         justify-content: flex-end;
                                         padding: 16px;
-                                        border-top: 1px solid var(--border-color);
+                                        border-top: 1px solid #ddd;
                                     }
                                     
                                     .settings-save-btn {
-                                        background-color: var(--primary-color);
+                                        background-color: #57068c;
                                         color: white;
                                         border: none;
                                         border-radius: 4px;
@@ -5923,7 +6502,7 @@ const demoDocuments = [
                                         padding: 4px 8px;
                                         font-family: 'Open Sans', sans-serif;
                                         font-size: 14px;
-                                        border: 1px solid var(--primary-color);
+                                        border: 1px solid #57068c;
                                         border-radius: 4px;
                                     }
                                     
@@ -10027,6 +10606,839 @@ const demoDocuments = [
                     }
                 },
 
+                // Toulmin Mode
+                claims: {
+                    name: 'Toulmin Mode',
+                    currentStage: 1, // 1 = claims, 2 = evidence, 3 = warrants
+                    currentClaimIndex: 0, // Which claim we're working on in stage 2
+                    sentences: [],
+                    claimIndices: [], // Array of sentence indices that are claims
+                    claimEvidence: {}, // Map: {claimIndex: [evidenceIndices]}
+                    warrants: [], // Array of {claimIndex, warrant, audienceAccepts, rebuttal, backing}
+                    modalElement: null,
+
+                    activate: function() {
+                        // Parse sentences from the document
+                        this.parseSentences();
+
+                        // Reset to stage 1
+                        this.currentStage = 1;
+                        this.currentClaimIndex = 0;
+
+                        // Load any saved classifications for this document
+                        this.loadClassifications();
+
+                        // Create and show the Toulmin Mode modal
+                        this.createClaimsModal();
+
+                        // Set up mode-specific options in the active indicator
+                        this.setupOptions();
+
+                        showNotification('Toulmin Mode enabled - Identify your claims and evidence');
+                    },
+
+                    deactivate: function() {
+                        // Save classifications first
+                        this.saveClassifications();
+
+                        // Remove modal if it exists
+                        const claimsModal = document.querySelector('.claims-modal-backdrop');
+                        if (claimsModal && claimsModal.parentNode) {
+                            claimsModal.parentNode.removeChild(claimsModal);
+                        }
+
+                        // Remove highlighting banner if it exists
+                        const banner = document.querySelector('.claims-highlighting-banner');
+                        if (banner && banner.parentNode) {
+                            banner.parentNode.removeChild(banner);
+                        }
+
+                        // Remove highlighting from the document
+                        this.removeHighlighting();
+
+                        // Reset internal state
+                        this.modalElement = null;
+                        this.currentStage = 1;
+                        this.currentClaimIndex = 0;
+                        this.sentences = [];
+                        this.claimIndices = [];
+                        this.claimEvidence = {};
+                        this.warrants = [];
+
+                        // Clear mode options
+                        clearModeOptions();
+
+                        showNotification('Toulmin Mode disabled');
+                    },
+
+                    saveClassifications: function() {
+                        if (this.claimIndices.length === 0 || !DocumentManager.currentDocument) {
+                            return;
+                        }
+
+                        if (!DocumentManager.currentDocument.claimsData) {
+                            DocumentManager.currentDocument.claimsData = {};
+                        }
+
+                        const contentKey = this.createContentKey();
+
+                        DocumentManager.currentDocument.claimsData[contentKey] = {
+                            sentences: this.sentences,
+                            claimIndices: this.claimIndices,
+                            claimEvidence: this.claimEvidence,
+                            warrants: this.warrants,
+                            timestamp: new Date().toISOString()
+                        };
+
+                        DocumentManager.saveDocument();
+                    },
+
+                    loadClassifications: function() {
+                        this.claimIndices = [];
+                        this.claimEvidence = {};
+                        this.warrants = [];
+
+                        if (!DocumentManager.currentDocument || !DocumentManager.currentDocument.claimsData) {
+                            return;
+                        }
+
+                        const contentKey = this.createContentKey();
+
+                        if (DocumentManager.currentDocument.claimsData[contentKey]) {
+                            const savedData = DocumentManager.currentDocument.claimsData[contentKey];
+
+                            if (this.sentencesMatch(savedData.sentences, this.sentences)) {
+                                this.claimIndices = savedData.claimIndices || [];
+                                this.claimEvidence = savedData.claimEvidence || {};
+                                this.warrants = savedData.warrants || [];
+                            }
+                        }
+                    },
+
+                    createContentKey: function() {
+                        const contentString = this.sentences.join('|');
+                        return this.hashString(contentString);
+                    },
+
+                    hashString: function(str) {
+                        let hash = 0;
+                        if (str.length === 0) return hash;
+
+                        for (let i = 0; i < str.length; i++) {
+                            const char = str.charCodeAt(i);
+                            hash = ((hash << 5) - hash) + char;
+                            hash = hash & hash;
+                        }
+
+                        return 'content_' + Math.abs(hash).toString(16);
+                    },
+
+                    sentencesMatch: function(savedSentences, currentSentences) {
+                        if (Math.abs(savedSentences.length - currentSentences.length) > 2) {
+                            return false;
+                        }
+
+                        if (savedSentences.join('') === currentSentences.join('')) {
+                            return true;
+                        }
+
+                        return false;
+                    },
+
+                    getOptions: function() {
+                        return {
+                            currentIndex: this.currentSentenceIndex
+                        };
+                    },
+
+                    setupOptions: function() {
+                        clearModeOptions();
+
+                        const optionContainer = document.createElement('div');
+                        optionContainer.className = 'mode-option';
+
+                        const sentenceCounter = document.createElement('span');
+                        sentenceCounter.className = 'mode-option-label';
+                        sentenceCounter.id = 'claims-sentence-counter';
+                        sentenceCounter.textContent = `Sentence ${this.currentSentenceIndex + 1} of ${this.sentences.length}`;
+
+                        optionContainer.appendChild(sentenceCounter);
+                        activeModeOptions.appendChild(optionContainer);
+                    },
+
+                    parseSentences: function() {
+                        const textToProcess = editor.innerText;
+                        const sentenceRegex = /([^.!?]+[.!?]+)/g;
+
+                        this.sentences = [];
+                        let match;
+
+                        while ((match = sentenceRegex.exec(textToProcess)) !== null) {
+                            this.sentences.push(match[0].trim());
+                        }
+
+                        if (this.sentences.length === 0 && textToProcess.trim().length > 0) {
+                            this.sentences.push(textToProcess.trim());
+                        }
+                    },
+
+                    createClaimsModal: function() {
+                        const modalBackdrop = document.createElement('div');
+                        modalBackdrop.className = 'claims-modal-backdrop';
+
+                        const modal = document.createElement('div');
+                        modal.className = 'claims-modal';
+
+                        // Modal header
+                        const modalHeader = document.createElement('div');
+                        modalHeader.className = 'claims-modal-header';
+
+                        const modalTitle = document.createElement('h3');
+                        modalTitle.textContent = 'Toulmin Mode';
+                        modalTitle.id = 'toulmin-modal-title';
+
+                        const closeButton = document.createElement('button');
+                        closeButton.className = 'claims-modal-close';
+                        closeButton.innerHTML = '&times;';
+                        closeButton.setAttribute('aria-label', 'Close Toulmin Mode');
+                        closeButton.setAttribute('onclick', 'exitClaimsMode()');
+
+                        modalHeader.appendChild(modalTitle);
+                        modalHeader.appendChild(closeButton);
+
+                        // Modal content
+                        const modalContent = document.createElement('div');
+                        modalContent.className = 'claims-modal-content';
+
+                        // Stage indicator
+                        const stageIndicator = document.createElement('div');
+                        stageIndicator.id = 'toulmin-stage-indicator';
+                        stageIndicator.className = 'toulmin-stage-indicator';
+                        modalContent.appendChild(stageIndicator);
+
+                        // Instructions
+                        const instructions = document.createElement('div');
+                        instructions.id = 'toulmin-instructions';
+                        instructions.className = 'toulmin-instructions';
+                        modalContent.appendChild(instructions);
+
+                        // Sentences container
+                        const container = document.createElement('div');
+                        container.id = 'claims-mode-container';
+                        container.className = 'toulmin-sentences-container';
+                        modalContent.appendChild(container);
+
+                        // Modal footer
+                        const modalFooter = document.createElement('div');
+                        modalFooter.className = 'claims-modal-footer';
+
+                        const footerButtons = document.createElement('div');
+                        footerButtons.className = 'claims-footer-buttons';
+
+                        const exitButton = document.createElement('button');
+                        exitButton.className = 'claims-footer-button secondary';
+                        exitButton.textContent = 'Cancel';
+                        exitButton.setAttribute('onclick', 'disableCurrentMode()');
+
+                        const actionButton = document.createElement('button');
+                        actionButton.id = 'toulmin-action-button';
+                        actionButton.className = 'claims-footer-button primary';
+                        actionButton.textContent = 'Next';
+                        actionButton.setAttribute('onclick', 'toulminNextStage()');
+
+                        footerButtons.appendChild(exitButton);
+                        footerButtons.appendChild(actionButton);
+
+                        modalFooter.appendChild(footerButtons);
+
+                        // Assemble and add to document
+                        modal.appendChild(modalHeader);
+                        modal.appendChild(modalContent);
+                        modal.appendChild(modalFooter);
+                        modalBackdrop.appendChild(modal);
+                        document.body.appendChild(modalBackdrop);
+
+                        this.modalElement = modalBackdrop;
+
+                        // Render the initial stage AFTER adding to DOM
+                        this.renderStage();
+
+                        // Add escape key handler
+                        document.addEventListener('keydown', function(e) {
+                            if (e.key === 'Escape' && document.querySelector('.claims-modal-backdrop')) {
+                                disableCurrentMode();
+                            }
+                        });
+                    },
+
+                    renderStage: function() {
+                        const stageIndicator = document.getElementById('toulmin-stage-indicator');
+                        const instructions = document.getElementById('toulmin-instructions');
+                        const container = document.getElementById('claims-mode-container');
+                        const actionButton = document.getElementById('toulmin-action-button');
+
+                        if (!stageIndicator || !instructions || !container || !actionButton) return;
+
+                        // Clear container
+                        container.innerHTML = '';
+
+                        if (this.currentStage === 1) {
+                            // Stage 1: Identify Claims
+                            stageIndicator.innerHTML = '<strong>Stage 1 of 3:</strong> Identify Your Main Claims';
+                            stageIndicator.className = 'toulmin-stage-indicator stage-1';
+
+                            instructions.innerHTML = '<p><strong>Click on sentences</strong> that articulate your main claims or arguments.</p>';
+
+                            actionButton.textContent = 'Next: Identify Evidence';
+
+                            // Display all sentences
+                            this.sentences.forEach((sentence, index) => {
+                                const sentenceDiv = document.createElement('div');
+                                sentenceDiv.className = 'toulmin-sentence';
+                                sentenceDiv.dataset.index = index;
+                                sentenceDiv.textContent = sentence;
+
+                                // Check if already in claimIndices
+                                if (this.claimIndices.includes(index)) {
+                                    sentenceDiv.classList.add('highlighted-claim');
+                                }
+
+                                // Add click handler
+                                sentenceDiv.onclick = () => this.toggleClaim(index);
+
+                                container.appendChild(sentenceDiv);
+                            });
+                        } else if (this.currentStage === 2) {
+                            // Stage 2: Identify Evidence (claim-by-claim)
+                            if (this.claimIndices.length === 0) {
+                                container.innerHTML = '<p style="text-align: center; color: #999; padding: 40px;">No claims identified. Please go back and identify at least one claim.</p>';
+                                actionButton.textContent = 'Back to Claims';
+                                actionButton.setAttribute('onclick', 'toulminPreviousStage()');
+                                return;
+                            }
+
+                            const currentClaimIdx = this.claimIndices[this.currentClaimIndex];
+                            const totalClaims = this.claimIndices.length;
+
+                            stageIndicator.innerHTML = `<strong>Stage 2 of 3:</strong> Identify Evidence (Claim ${this.currentClaimIndex + 1} of ${totalClaims})`;
+                            stageIndicator.className = 'toulmin-stage-indicator stage-2';
+
+                            // Show the current claim
+                            const claimDisplay = document.createElement('div');
+                            claimDisplay.className = 'current-claim-display';
+                            claimDisplay.innerHTML = `<strong>Claim:</strong> "${this.sentences[currentClaimIdx]}"`;
+                            container.appendChild(claimDisplay);
+
+                            instructions.innerHTML = '<p><strong>How do you know this to be true?</strong> Click on the sentences that provide evidence to support this specific claim. If those sentences don\'t yet appear in your draft, pause to add them now.</p>';
+
+                            // Initialize evidence array for this claim if not exists
+                            if (!this.claimEvidence[currentClaimIdx]) {
+                                this.claimEvidence[currentClaimIdx] = [];
+                            }
+
+                            // Display all sentences (except the current claim)
+                            this.sentences.forEach((sentence, index) => {
+                                if (index === currentClaimIdx) return; // Skip the current claim
+
+                                const sentenceDiv = document.createElement('div');
+                                sentenceDiv.className = 'toulmin-sentence';
+                                sentenceDiv.dataset.index = index;
+                                sentenceDiv.textContent = sentence;
+
+                                // Show if this sentence is another claim (but not clickable)
+                                if (this.claimIndices.includes(index)) {
+                                    sentenceDiv.classList.add('shown-claim');
+                                }
+                                // Check if already selected as evidence for this claim
+                                else if (this.claimEvidence[currentClaimIdx].includes(index)) {
+                                    sentenceDiv.classList.add('highlighted-evidence');
+                                    sentenceDiv.onclick = () => this.toggleEvidence(currentClaimIdx, index);
+                                }
+                                // Regular sentence - can be selected
+                                else {
+                                    sentenceDiv.onclick = () => this.toggleEvidence(currentClaimIdx, index);
+                                }
+
+                                container.appendChild(sentenceDiv);
+                            });
+
+                            // Update button text
+                            if (this.currentClaimIndex < totalClaims - 1) {
+                                actionButton.textContent = 'Next Claim';
+                            } else {
+                                actionButton.textContent = 'Next: Identify Warrants';
+                            }
+                            actionButton.setAttribute('onclick', 'toulminNextStage()');
+                        } else if (this.currentStage === 3) {
+                            // Stage 3: Identify Warrants
+                            stageIndicator.innerHTML = '<strong>Stage 3 of 3:</strong> Identify Warrants & Backing';
+                            stageIndicator.className = 'toulmin-stage-indicator stage-3';
+
+                            instructions.innerHTML = '<p><strong>What unspoken assumptions connect your evidence to your claims?</strong> For each claim, identify the warrant that bridges the gap between evidence and conclusion.</p>';
+
+                            actionButton.textContent = 'Done';
+                            actionButton.setAttribute('onclick', 'exitClaimsMode()');
+
+                            if (this.claimIndices.length === 0) {
+                                container.innerHTML = '<p style="text-align: center; color: #999; padding: 40px;">No claims identified. Please go back and identify at least one claim.</p>';
+                                return;
+                            }
+
+                            // Create warrant entry for each claim
+                            this.claimIndices.forEach(claimIndex => {
+                                const warrantBlock = document.createElement('div');
+                                warrantBlock.className = 'warrant-block';
+
+                                // Claim display
+                                const claimDisplay = document.createElement('div');
+                                claimDisplay.className = 'warrant-claim-display';
+                                claimDisplay.innerHTML = `<strong>Claim:</strong> "${this.sentences[claimIndex]}"`;
+                                warrantBlock.appendChild(claimDisplay);
+
+                                // Evidence display (specific to this claim)
+                                const evidenceForThisClaim = this.claimEvidence[claimIndex] || [];
+                                if (evidenceForThisClaim.length > 0) {
+                                    const evidenceDisplay = document.createElement('div');
+                                    evidenceDisplay.className = 'warrant-evidence-display';
+                                    evidenceDisplay.innerHTML = `<strong>Evidence:</strong><ul>${evidenceForThisClaim.map(idx => `<li>${this.sentences[idx]}</li>`).join('')}</ul>`;
+                                    warrantBlock.appendChild(evidenceDisplay);
+                                }
+
+                                // Find existing warrant data
+                                let warrantData = this.warrants.find(w => w.claimIndex === claimIndex);
+                                if (!warrantData) {
+                                    warrantData = {
+                                        claimIndex: claimIndex,
+                                        evidenceIndices: evidenceIndices,
+                                        warrant: '',
+                                        audienceAccepts: null,
+                                        rebuttal: '',
+                                        backing: ''
+                                    };
+                                    this.warrants.push(warrantData);
+                                }
+
+                                // Warrant input
+                                const warrantLabel = document.createElement('label');
+                                warrantLabel.className = 'warrant-label';
+                                warrantLabel.textContent = 'What assumption connects this evidence to the claim?';
+                                warrantBlock.appendChild(warrantLabel);
+
+                                const warrantTextarea = document.createElement('textarea');
+                                warrantTextarea.className = 'warrant-textarea';
+                                warrantTextarea.placeholder = 'Enter the unspoken warrant or assumption here...';
+                                warrantTextarea.value = warrantData.warrant || '';
+                                warrantTextarea.oninput = (e) => {
+                                    warrantData.warrant = e.target.value;
+                                };
+                                warrantBlock.appendChild(warrantTextarea);
+
+                                // Audience acceptance question
+                                const audienceQuestion = document.createElement('div');
+                                audienceQuestion.className = 'audience-question';
+                                audienceQuestion.innerHTML = '<strong>Will your intended audience tacitly accept this warrant?</strong>';
+                                warrantBlock.appendChild(audienceQuestion);
+
+                                const audienceOptions = document.createElement('div');
+                                audienceOptions.className = 'audience-options';
+
+                                const yesOption = document.createElement('button');
+                                yesOption.className = 'audience-option-btn';
+                                yesOption.textContent = 'Yes';
+                                if (warrantData.audienceAccepts === true) yesOption.classList.add('selected');
+                                yesOption.onclick = () => {
+                                    warrantData.audienceAccepts = true;
+                                    this.renderStage();
+                                };
+
+                                const noOption = document.createElement('button');
+                                noOption.className = 'audience-option-btn';
+                                noOption.textContent = 'No';
+                                if (warrantData.audienceAccepts === false) noOption.classList.add('selected');
+                                noOption.onclick = () => {
+                                    warrantData.audienceAccepts = false;
+                                    this.renderStage();
+                                };
+
+                                audienceOptions.appendChild(yesOption);
+                                audienceOptions.appendChild(noOption);
+                                warrantBlock.appendChild(audienceOptions);
+
+                                // Conditional rebuttal/backing section
+                                if (warrantData.audienceAccepts === false) {
+                                    const rebuttalSection = document.createElement('div');
+                                    rebuttalSection.className = 'rebuttal-section';
+
+                                    const rebuttalLabel = document.createElement('label');
+                                    rebuttalLabel.className = 'warrant-label';
+                                    rebuttalLabel.textContent = 'Likely Rebuttal:';
+                                    rebuttalSection.appendChild(rebuttalLabel);
+
+                                    const rebuttalTextarea = document.createElement('textarea');
+                                    rebuttalTextarea.className = 'warrant-textarea small';
+                                    rebuttalTextarea.placeholder = 'What objections might your audience raise?';
+                                    rebuttalTextarea.value = warrantData.rebuttal || '';
+                                    rebuttalTextarea.oninput = (e) => {
+                                        warrantData.rebuttal = e.target.value;
+                                    };
+                                    rebuttalSection.appendChild(rebuttalTextarea);
+
+                                    const backingLabel = document.createElement('label');
+                                    backingLabel.className = 'warrant-label';
+                                    backingLabel.textContent = 'Backing to Support Warrant:';
+                                    rebuttalSection.appendChild(backingLabel);
+
+                                    const backingTextarea = document.createElement('textarea');
+                                    backingTextarea.className = 'warrant-textarea small';
+                                    backingTextarea.placeholder = 'How can you support this warrant?';
+                                    backingTextarea.value = warrantData.backing || '';
+                                    backingTextarea.oninput = (e) => {
+                                        warrantData.backing = e.target.value;
+                                    };
+                                    rebuttalSection.appendChild(backingTextarea);
+
+                                    warrantBlock.appendChild(rebuttalSection);
+                                }
+
+                                container.appendChild(warrantBlock);
+                            });
+                        }
+                    },
+
+                    toggleClaim: function(index) {
+                        // Toggle claim selection
+                        const claimIdx = this.claimIndices.indexOf(index);
+                        if (claimIdx !== -1) {
+                            // Unselect - remove from claimIndices
+                            this.claimIndices.splice(claimIdx, 1);
+                            // Also remove any evidence associated with this claim
+                            delete this.claimEvidence[index];
+                        } else {
+                            // Select - add to claimIndices
+                            this.claimIndices.push(index);
+                        }
+
+                        // Re-render
+                        this.renderStage();
+                    },
+
+                    toggleEvidence: function(claimIndex, evidenceIndex) {
+                        // Toggle evidence for a specific claim
+                        if (!this.claimEvidence[claimIndex]) {
+                            this.claimEvidence[claimIndex] = [];
+                        }
+
+                        const evidenceIdx = this.claimEvidence[claimIndex].indexOf(evidenceIndex);
+                        if (evidenceIdx !== -1) {
+                            // Unselect
+                            this.claimEvidence[claimIndex].splice(evidenceIdx, 1);
+                        } else {
+                            // Select
+                            this.claimEvidence[claimIndex].push(evidenceIndex);
+                        }
+
+                        // Re-render
+                        this.renderStage();
+                    },
+
+                    nextStage: function() {
+                        if (this.currentStage === 1) {
+                            // Move from stage 1 to stage 2
+                            if (this.claimIndices.length === 0) {
+                                showNotification('Please identify at least one claim before proceeding');
+                                return;
+                            }
+                            this.currentStage = 2;
+                            this.currentClaimIndex = 0;
+                            this.renderStage();
+                        } else if (this.currentStage === 2) {
+                            // In stage 2, move to next claim or stage 3
+                            if (this.currentClaimIndex < this.claimIndices.length - 1) {
+                                // Move to next claim
+                                this.currentClaimIndex++;
+                                this.renderStage();
+                            } else {
+                                // All claims done, move to stage 3
+                                this.currentStage = 3;
+                                this.renderStage();
+                            }
+                        } else {
+                            // Stage 3 complete - exit and apply highlighting with warrants
+                            exitClaimsMode();
+                        }
+                    },
+
+                    previousStage: function() {
+                        if (this.currentStage === 2) {
+                            if (this.currentClaimIndex > 0) {
+                                // Go to previous claim
+                                this.currentClaimIndex--;
+                                this.renderStage();
+                            } else {
+                                // Go back to stage 1
+                                this.currentStage = 1;
+                                this.renderStage();
+                            }
+                        } else if (this.currentStage === 3) {
+                            // Go back to last claim in stage 2
+                            this.currentStage = 2;
+                            this.currentClaimIndex = this.claimIndices.length - 1;
+                            this.renderStage();
+                        }
+                    },
+
+                    addSentenceWithClassification: function(container, index) {
+                        if (index < 0 || index >= this.sentences.length) {
+                            return;
+                        }
+
+                        // Create a block for this sentence
+                        const block = document.createElement('div');
+                        block.className = 'claims-sentence-block';
+                        block.dataset.index = index;
+
+                        // Sentence display
+                        const sentenceDisplay = document.createElement('div');
+                        sentenceDisplay.className = 'claims-sentence';
+                        sentenceDisplay.textContent = this.sentences[index];
+
+                        // Classification area
+                        const classificationArea = document.createElement('div');
+                        classificationArea.className = 'claims-classification-wrapper';
+
+                        // Prompt
+                        const prompt = document.createElement('div');
+                        prompt.className = 'claims-prompt';
+                        prompt.innerHTML = '<strong>Classify this sentence:</strong> Is it an observation (fact/data) or a claim (argument/interpretation)?';
+
+                        // Buttons
+                        const buttonGroup = document.createElement('div');
+                        buttonGroup.className = 'claims-button-group';
+
+                        const observationBtn = document.createElement('button');
+                        observationBtn.className = 'claims-classify-button observation-btn';
+                        observationBtn.innerHTML = '<i class="fas fa-eye"></i> Observation';
+                        observationBtn.dataset.classification = 'observation';
+
+                        const claimBtn = document.createElement('button');
+                        claimBtn.className = 'claims-classify-button claim-btn';
+                        claimBtn.innerHTML = '<i class="fas fa-comment"></i> Claim';
+                        claimBtn.dataset.classification = 'claim';
+
+                        const passBtn = document.createElement('button');
+                        passBtn.className = 'claims-classify-button pass-btn';
+                        passBtn.innerHTML = '<i class="fas fa-forward"></i> Pass';
+                        passBtn.dataset.classification = 'pass';
+
+                        // Add click handlers
+                        [observationBtn, claimBtn, passBtn].forEach(btn => {
+                            const functionName = `classifySentence_${index}_${btn.dataset.classification}`;
+                            window[functionName] = () => {
+                                const classification = btn.dataset.classification;
+
+                                if (modes.claims) {
+                                    modes.claims.classifications[index] = classification;
+
+                                    // Highlight the selected button
+                                    buttonGroup.querySelectorAll('.claims-classify-button').forEach(b => {
+                                        b.classList.remove('selected');
+                                    });
+                                    btn.classList.add('selected');
+
+                                    // Move to next sentence after a short delay
+                                    if (index < modes.claims.sentences.length - 1) {
+                                        setTimeout(() => {
+                                            modes.claims.currentSentenceIndex = index + 1;
+                                            modes.claims.addSentenceWithClassification(container, index + 1);
+
+                                            // Update counter
+                                            const counter = document.getElementById('claims-sentence-counter');
+                                            if (counter) {
+                                                counter.textContent = `Sentence ${modes.claims.currentSentenceIndex + 1} of ${modes.claims.sentences.length}`;
+                                            }
+
+                                            const statusText = document.querySelector('.claims-status-text');
+                                            if (statusText) {
+                                                statusText.textContent = `Sentence ${modes.claims.currentSentenceIndex + 1} of ${modes.claims.sentences.length}`;
+                                            }
+
+                                            // Scroll to new block
+                                            const newBlock = container.querySelector(`.claims-sentence-block[data-index="${index + 1}"]`);
+                                            if (newBlock) {
+                                                newBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                            }
+                                        }, 300);
+                                    } else {
+                                        // Last sentence - show completion message
+                                        setTimeout(() => {
+                                            const statusText = document.querySelector('.claims-status-text');
+                                            if (statusText) {
+                                                statusText.textContent = 'All sentences classified! Click "Exit & Apply Highlighting"';
+                                            }
+                                        }, 300);
+                                    }
+                                }
+                            };
+                            btn.setAttribute('onclick', `${functionName}()`);
+                        });
+
+                        // Check if already classified
+                        if (this.classifications[index]) {
+                            const classification = this.classifications[index];
+                            if (classification === 'observation') {
+                                observationBtn.classList.add('selected');
+                            } else if (classification === 'claim') {
+                                claimBtn.classList.add('selected');
+                            } else if (classification === 'pass') {
+                                passBtn.classList.add('selected');
+                            }
+                        }
+
+                        buttonGroup.appendChild(observationBtn);
+                        buttonGroup.appendChild(claimBtn);
+                        buttonGroup.appendChild(passBtn);
+
+                        classificationArea.appendChild(prompt);
+                        classificationArea.appendChild(buttonGroup);
+
+                        block.appendChild(sentenceDisplay);
+                        block.appendChild(classificationArea);
+
+                        container.appendChild(block);
+                    },
+
+                    applyHighlighting: function() {
+                        if (this.claimIndices.length === 0) {
+                            return;
+                        }
+
+                        // Get editor text
+                        const editorText = editor.innerText;
+
+                        // Build highlighted HTML
+                        let highlightedHTML = '';
+                        let lastIndex = 0;
+
+                        // Collect all evidence indices (flattened from all claims)
+                        const allEvidenceIndices = new Set();
+                        Object.values(this.claimEvidence).forEach(evidenceArray => {
+                            evidenceArray.forEach(idx => allEvidenceIndices.add(idx));
+                        });
+
+                        this.sentences.forEach((sentence, index) => {
+                            const sentenceStart = editorText.indexOf(sentence, lastIndex);
+
+                            if (sentenceStart !== -1) {
+                                // Add any text before this sentence
+                                if (sentenceStart > lastIndex) {
+                                    highlightedHTML += editorText.substring(lastIndex, sentenceStart);
+                                }
+
+                                // Add the highlighted sentence
+                                if (allEvidenceIndices.has(index)) {
+                                    // This is evidence
+                                    highlightedHTML += `<span class="claims-observation">${sentence}</span>`;
+                                } else if (this.claimIndices.includes(index)) {
+                                    // This is a claim
+                                    highlightedHTML += `<span class="claims-claim">${sentence}</span>`;
+
+                                    // Add warrant annotation if exists
+                                    const warrantData = this.warrants.find(w => w.claimIndex === index);
+                                    if (warrantData && warrantData.warrant) {
+                                        let warrantHTML = `<span class="warrant-annotation" contenteditable="false">`;
+                                        warrantHTML += `<span class="warrant-icon">💡</span>`;
+                                        warrantHTML += `<span class="warrant-text"><strong>Warrant:</strong> ${warrantData.warrant}`;
+
+                                        if (warrantData.audienceAccepts === false) {
+                                            if (warrantData.rebuttal) {
+                                                warrantHTML += `<br><strong>Rebuttal:</strong> ${warrantData.rebuttal}`;
+                                            }
+                                            if (warrantData.backing) {
+                                                warrantHTML += `<br><strong>Backing:</strong> ${warrantData.backing}`;
+                                            }
+                                        }
+                                        warrantHTML += `</span></span>`;
+                                        highlightedHTML += warrantHTML;
+                                    }
+                                } else {
+                                    highlightedHTML += sentence;
+                                }
+
+                                lastIndex = sentenceStart + sentence.length;
+                            }
+                        });
+
+                        // Add any remaining text
+                        if (lastIndex < editorText.length) {
+                            highlightedHTML += editorText.substring(lastIndex);
+                        }
+
+                        // Apply to editor
+                        editor.innerHTML = highlightedHTML;
+
+                        // Show the highlighting banner
+                        this.showHighlightingBanner();
+                    },
+
+                    removeHighlighting: function() {
+                        // Remove all highlighting spans
+                        const observations = editor.querySelectorAll('.claims-observation');
+                        const claims = editor.querySelectorAll('.claims-claim');
+                        const warrants = editor.querySelectorAll('.warrant-annotation');
+
+                        observations.forEach(span => {
+                            const text = document.createTextNode(span.textContent);
+                            span.parentNode.replaceChild(text, span);
+                        });
+
+                        claims.forEach(span => {
+                            const text = document.createTextNode(span.textContent);
+                            span.parentNode.replaceChild(text, span);
+                        });
+
+                        warrants.forEach(span => {
+                            if (span.parentNode) {
+                                span.parentNode.removeChild(span);
+                            }
+                        });
+
+                        // Normalize the editor content to merge text nodes
+                        editor.normalize();
+                    },
+
+                    showHighlightingBanner: function() {
+                        // Remove existing banner if any
+                        const existingBanner = document.querySelector('.claims-highlighting-banner');
+                        if (existingBanner) {
+                            existingBanner.remove();
+                        }
+
+                        // Create banner
+                        const banner = document.createElement('div');
+                        banner.className = 'claims-highlighting-banner';
+                        banner.innerHTML = `
+                            <div class="claims-banner-content">
+                                <div class="claims-banner-text">
+                                    <i class="fas fa-highlighter"></i>
+                                    <span><strong>Toulmin Mode highlighting active:</strong>
+                                    <span class="claims-claim" style="display: inline; padding: 2px 6px; margin: 0 4px;">Claims</span>
+                                    <span class="claims-observation" style="display: inline; padding: 2px 6px; margin: 0 4px;">Evidence</span>
+                                    </span>
+                                </div>
+                                <button class="claims-banner-close" onclick="disableCurrentMode()" aria-label="Remove highlighting">
+                                    <i class="fas fa-times"></i> Remove Highlighting
+                                </button>
+                            </div>
+                        `;
+
+                        // Insert banner above editor
+                        const editorContainer = document.querySelector('.editor-container');
+                        if (editorContainer) {
+                            editorContainer.insertBefore(banner, editorContainer.firstChild);
+                        }
+                    }
+                },
+
 
                 wordCloud: {
     name: 'Word Cloud Mode',
@@ -13903,7 +15315,65 @@ infrared: {
             }
         }
         };
-        
+
+        // Claims mode global functions
+        window.exitClaimsMode = function() {
+            console.log("Global exitClaimsMode called");
+
+            // Save classifications first
+            if (modes.claims) {
+                try {
+                    modes.claims.saveClassifications();
+                } catch (e) {
+                    console.error("Error saving classifications:", e);
+                }
+            }
+
+            // Find and remove the modal
+            const claimsModal = document.querySelector('.claims-modal-backdrop');
+            if (claimsModal && claimsModal.parentNode) {
+                claimsModal.parentNode.removeChild(claimsModal);
+            }
+
+            // Apply highlighting (this also shows the banner)
+            if (modes.claims) {
+                modes.claims.applyHighlighting();
+            }
+
+            // Show notification - but DON'T disable the mode yet
+            showNotification('Classifications applied! Click "Remove Highlighting" to turn off the mode.');
+        };
+
+        window.toulminNextStage = function() {
+            if (modes.claims) {
+                modes.claims.nextStage();
+            }
+        };
+
+        window.toulminPreviousStage = function() {
+            if (modes.claims) {
+                modes.claims.previousStage();
+            }
+        };
+
+        window.claimsRevealAll = function() {
+            if (modes.claims) {
+                const container = document.getElementById('claims-mode-container');
+                if (container) {
+                    // Add all remaining sentences
+                    for (let i = modes.claims.currentSentenceIndex + 1; i < modes.claims.sentences.length; i++) {
+                        modes.claims.addSentenceWithClassification(container, i);
+                    }
+
+                    // Update status
+                    const statusText = document.querySelector('.claims-status-text');
+                    if (statusText) {
+                        statusText.textContent = `All ${modes.claims.sentences.length} sentences shown`;
+                    }
+                }
+            }
+        };
+
         // Override toggleTextrisMode
         window.toggleTextrisMode = function() {
             if (textrisMode) {
